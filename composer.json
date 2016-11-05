@@ -1,0 +1,8 @@
+{
+    "name": "web",
+    "require": {
+        "m1ome/phalcon-datatables": "1.*",
+        "mattdanger/volt-helpers": "dev-master",
+        "mattdanger/phalcon-table-sort": "dev-master"
+    }
+}
