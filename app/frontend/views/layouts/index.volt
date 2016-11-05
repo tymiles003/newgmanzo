@@ -93,7 +93,7 @@
               </div>
               <div class="caption">
                 <h4><a href="{{url('details/')}}"><a href="detail.html" style="color:#333;">{{values['title'] | capitalize}}</a></a></h4>
-                <p class="price"> $123.20 </p>
+                <p class="price"> ${{values['sale_price']}} </p>
                 <div class="rating"> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> </div>
               </div>
               <div class="button-group">
