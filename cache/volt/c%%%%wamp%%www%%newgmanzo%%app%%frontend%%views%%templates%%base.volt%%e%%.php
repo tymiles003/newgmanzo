@@ -14,7 +14,7 @@ a:5:{i:0;s:622:"<!DOCTYPE html>
 	    <title>GMANZO</title>
             <?= $this->assets->outputCss('headers') ?>
             <link href="https://fonts.googleapis.com/css?family=Droid+Sans|Open+Sans" rel="stylesheet"> 
-            ";s:4:"head";a:1:{i:0;a:4:{s:4:"type";i:357;s:5:"value";s:1:" ";s:4:"file";s:60:"C:\wamp\www\newgmanzo\app/frontend/views/templates/base.volt";s:4:"line";i:17;}}i:1;s:28732:"
+            ";s:4:"head";a:1:{i:0;a:4:{s:4:"type";i:357;s:5:"value";s:1:" ";s:4:"file";s:60:"C:\wamp\www\newgmanzo\app/frontend/views/templates/base.volt";s:4:"line";i:17;}}i:1;s:10301:"
 	    
 		
 		<!-- Favicon -->
@@ -174,7 +174,7 @@ a:5:{i:0;s:622:"<!DOCTYPE html>
         <div class="table-container">
           <!-- Logo Start -->
           <div class="col-table-cell col-lg-4 col-md-4 col-sm-12 col-xs-12 inner">
-            <div id="logo"><a href="index.html"><img class="img-responsive" src="image/logo.png" title="MarketShop" alt="MarketShop" /></a></div>
+            <div id="logo"><a href="index.html"><img class="img-responsive" src="<?= $this->url->get('assets/image/logo.png') ?>" title="GMANZO" alt="GMANZO" /></a></div>
           </div>
           <!-- Logo End -->
           <!-- Search Start-->
@@ -210,31 +210,6 @@ a:5:{i:0;s:622:"<!DOCTYPE html>
                     </tbody>
                   </table>
                 </li>
-                <li>
-                  <div>
-                    <table class="table table-bordered">
-                      <tbody>
-                        <tr>
-                          <td class="text-right"><strong>Sub-Total</strong></td>
-                          <td class="text-right">$940.00</td>
-                        </tr>
-                        <tr>
-                          <td class="text-right"><strong>Eco Tax (-2.00)</strong></td>
-                          <td class="text-right">$4.00</td>
-                        </tr>
-                        <tr>
-                          <td class="text-right"><strong>VAT (20%)</strong></td>
-                          <td class="text-right">$188.00</td>
-                        </tr>
-                        <tr>
-                          <td class="text-right"><strong>Total</strong></td>
-                          <td class="text-right">$1,132.00</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <p class="checkout"><a href="cart.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> View Cart</a>&nbsp;&nbsp;&nbsp;<a href="checkout.html" class="btn btn-primary"><i class="fa fa-share"></i> Checkout</a></p>
-                  </div>
-                </li>
               </ul>
             </div>
           </div>
@@ -253,308 +228,20 @@ a:5:{i:0;s:622:"<!DOCTYPE html>
             <li class="dropdown"><a>Shop by Categories</a>
               <div class="dropdown-menu">
                 <ul>
-                  <li> <a href="category.html">Clothing<span>&rsaquo;</span></a>
-                    <div class="dropdown-menu">
-                      <ul>
-                        <li><a href="category.html">Men <span>&rsaquo;</span></a>
-                          <div class="dropdown-menu">
-                            <ul>
-                              <li><a href="category.html">Sub Categories</a></li>
-                              <li><a href="category.html">Sub Categories</a></li>
-                              <li><a href="category.html">Sub Categories</a></li>
-                              <li><a href="category.html">Sub Categories</a></li>
-                              <li><a href="category.html">Sub Categories New</a></li>
-                            </ul>
-                          </div>
-                        </li>
-                        <li><a href="category.html" >Women</a> </li>
-                        <li><a href="category.html">Girls<span>&rsaquo;</span></a>
-                          <div class="dropdown-menu">
-                            <ul>
-                              <li><a href="category.html">Sub Categories </a></li>
-                              <li><a href="category.html">Sub Categories New</a></li>
-                              <li><a href="category.html">Sub Categories New</a></li>
-                            </ul>
-                          </div>
-                        </li>
-                        <li><a href="category.html">Boys</a></li>
-                        <li><a href="category.html">Baby</a></li>
-                        <li><a href="category.html">Accessories <span>&rsaquo;</span></a>
-                          <div class="dropdown-menu">
-                            <ul>
-                              <li><a href="category.html">New Sub Categories</a></li>
-                            </ul>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-                  <li> <a href="category.html">Electronics<span>&rsaquo;</span></a>
-                    <div class="dropdown-menu">
-                      <ul>
-                        <li> <a href="category.html">Laptops <span>&rsaquo;</span></a>
-                          <div class="dropdown-menu">
-                            <ul>
-                              <li> <a href="category.html">New Sub Categories </a> </li>
-                              <li> <a href="category.html">New Sub Categories </a> </li>
-                              <li> <a href="category.html">Sub Categories New </a> </li>
-                            </ul>
-                          </div>
-                        </li>
-                        <li> <a href="category.html">Desktops <span>&rsaquo;</span></a>
-                          <div class="dropdown-menu">
-                            <ul>
-                              <li> <a href="category.html">New Sub Categories </a> </li>
-                              <li> <a href="category.html">Sub Categories New </a> </li>
-                              <li> <a href="category.html">Sub Categories New </a> </li>
-                            </ul>
-                          </div>
-                        </li>
-                        <li> <a href="category.html">Cameras <span>&rsaquo;</span></a>
-                          <div class="dropdown-menu">
-                            <ul>
-                              <li> <a href="category.html">New Sub Categories</a></li>
-                            </ul>
-                          </div>
-                        </li>
-                        <li><a href="category.html">Mobile Phones <span>&rsaquo;</span></a>
-                          <div class="dropdown-menu">
-                            <ul>
-                              <li><a href="category.html">New Sub Categories</a></li>
-                              <li><a href="category.html">New Sub Categories</a></li>
-                            </ul>
-                          </div>
-                        </li>
-                        <li><a href="category.html">TV &amp; Home Audio <span>&rsaquo;</span></a>
-                          <div class="dropdown-menu">
-                            <ul>
-                              <li><a href="category.html">New Sub Categories </a> </li>
-                              <li><a href="category.html">Sub Categories New </a> </li>
-                            </ul>
-                          </div>
-                        </li>
-                        <li><a href="category.html">MP3 Players</a> </li>
-                      </ul>
-                    </div>
-                  </li>
-                  <li><a href="category.html">Shoes<span>&rsaquo;</span></a>
-                    <div class="dropdown-menu">
-                      <ul>
-                        <li><a href="category.html">Men</a> </li>
-                        <li><a href="category.html">Women <span>&rsaquo;</span></a>
-                          <div class="dropdown-menu">
-                            <ul>
-                              <li><a href="category.html">New Sub Categories </a> </li>
-                              <li><a href="category.html">Sub Categories </a> </li>
-                            </ul>
-                          </div>
-                        </li>
-                        <li><a href="category.html">Girls</a> </li>
-                        <li><a href="category.html">Boys</a> </li>
-                        <li><a href="category.html">Baby</a> </li>
-                        <li><a href="category.html">Accessories <span>&rsaquo;</span></a>
-                          <div class="dropdown-menu">
-                            <ul>
-                              <li><a href="category.html">New Sub Categories</a></li>
-                              <li><a href="category.html">New Sub Categories</a></li>
-                              <li><a href="category.html">Sub Categories</a></li>
-                            </ul>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-                  <li> <a href="category.html">Watches<span>&rsaquo;</span></a>
-                    <div class="dropdown-menu">
-                      <ul>
-                        <li> <a href="category.html">Men's Watches</a></li>
-                        <li> <a href="category.html">Women's Watches</a></li>
-                        <li> <a href="category.html">Kids' Watches</a></li>
-                        <li> <a href="category.html">Accessories</a></li>
-                      </ul>
-                    </div>
-                  </li>
-                  <li> <a href="category.html">Jewellery<span>&rsaquo;</span></a>
-                    <div class="dropdown-menu">
-                      <ul>
-                        <li> <a href="category.html">Silver <span>&rsaquo;</span></a>
-                          <div class="dropdown-menu">
-                            <ul>
-                              <li> <a href="category.html">New Sub Categories</a></li>
-                              <li> <a href="category.html">New Sub Categories</a></li>
-                            </ul>
-                          </div>
-                        </li>
-                        <li><a href="category.html">Gold <span>&rsaquo;</span></a>
-                          <div class="dropdown-menu">
-                            <ul>
-                              <li><a href="category.html">test 1</a></li>
-                              <li><a href="category.html">test 2</a></li>
-                            </ul>
-                          </div>
-                        </li>
-                        <li><a href="category.html">Diamond</a></li>
-                        <li><a href="category.html">Pearl <span>&rsaquo;</span></a>
-                          <div class="dropdown-menu">
-                            <ul>
-                              <li><a href="category.html">New Sub Categories</a></li>
-                            </ul>
-                          </div>
-                        </li>
-                        <li><a href="category.html">Men's Jewellery</a></li>
-                        <li><a href="category.html">Children's Jewellery <span>&rsaquo;</span></a>
-                          <div class="dropdown-menu">
-                            <ul>
-                              <li><a href="category.html">New Sub Categories </a> </li>
-                            </ul>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-                  <li><a href="category.html">Health &amp; Beauty<span>&rsaquo;</span></a>
-                    <div class="dropdown-menu">
-                      <ul>
-                        <li> <a href="category.html">Perfumes</a></li>
-                        <li> <a href="category.html">Makeup</a></li>
-                        <li> <a href="category.html">Sun Care</a></li>
-                        <li> <a href="category.html">Skin Care</a></li>
-                        <li> <a href="category.html">Eye Care</a></li>
-                        <li> <a href="category.html">Hair Care</a></li>
-                      </ul>
-                    </div>
-                  </li>
-                  <li> <a href="category.html">Kids &amp; Babies<span>&rsaquo;</span></a>
-                    <div class="dropdown-menu">
-                      <ul>
-                        <li><a href="category.html">Toys</a></li>
-                        <li><a href="category.html">Games <span>&rsaquo;</span></a>
-                          <div class="dropdown-menu">
-                            <ul>
-                              <li><a href="category.html">test 25</a></li>
-                            </ul>
-                          </div>
-                        </li>
-                        <li><a href="category.html">Puzzles</a></li>
-                        <li><a href="category.html">Hobbies</a></li>
-                        <li><a href="category.html">Strollers</a></li>
-                        <li><a href="category.html">Health &amp; Safety</a></li>
-                      </ul>
-                    </div>
-                  </li>
-                  <li> <a href="category.html">Sports<span>&rsaquo;</span></a>
-                    <div class="dropdown-menu">
-                      <ul>
-                        <li><a href="category.html">Cycling</a></li>
-                        <li><a href="category.html">Running</a></li>
-                        <li><a href="category.html">Swimming</a></li>
-                        <li><a href="category.html">Football</a></li>
-                        <li><a href="category.html">Golf</a></li>
-                        <li><a href="category.html">Windsurfing</a></li>
-                      </ul>
-                    </div>
-                  </li>
-                  <li> <a href="category.html">Home &amp; Garden<span>&rsaquo;</span></a>
-                    <div class="dropdown-menu">
-                      <ul>
-                        <li><a href="category.html">Bedding</a></li>
-                        <li><a href="category.html">Food</a></li>
-                        <li><a href="category.html">Furniture</a></li>
-                        <li><a href="category.html">Kitchen</a></li>
-                        <li><a href="category.html">Lighting</a></li>
-                        <li><a href="category.html">Tools</a></li>
-                      </ul>
-                    </div>
-                  </li>
-                  <li> <a href="category.html">Wines &amp; Spirits<span>&rsaquo;</span></a>
-                    <div class="dropdown-menu">
-                      <ul>
-                        <li><a href="category.html">Wine</a></li>
-                        <li><a href="category.html">Whiskey</a></li>
-                        <li><a href="category.html">Vodka</a></li>
-                        <li><a href="category.html">Liqueurs</a></li>
-                        <li><a href="category.html">Beer</a></li>
-                      </ul>
-                    </div>
-                  </li>
+                <?php foreach ($category as $keys => $values) { ?>
+                  <li> <a href="<?= $this->url->get('category/?cat=' . $values['category_id']) ?>"><?= ucwords($values['category_name']) ?></a></li>
+                <?php } ?>
+                  
                 </ul>
               </div>
             </li>
-            <li class="menu_brands dropdown"><a href="#">Brands</a>
-              <div class="dropdown-menu">
-                <div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="image/product/apple_logo-60x60.jpg" title="Apple" alt="Apple" /></a><a href="#">Apple</a></div>
-                <div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="image/product/canon_logo-60x60.jpg" title="Canon" alt="Canon" /></a><a href="#">Canon</a></div>
-                <div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"> <a href="#"><img src="image/product/hp_logo-60x60.jpg" title="Hewlett-Packard" alt="Hewlett-Packard" /></a><a href="#">Hewlett-Packard</a></div>
-                <div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="image/product/htc_logo-60x60.jpg" title="HTC" alt="HTC" /></a><a href="#">HTC</a></div>
-                <div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="image/product/palm_logo-60x60.jpg" title="Palm" alt="Palm" /></a><a href="#">Palm</a></div>
-                <div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="image/product/sony_logo-60x60.jpg" title="Sony" alt="Sony" /></a><a href="#">Sony</a> </div>
-                <div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="image/product/canon_logo-60x60.jpg" title="test" alt="test" /></a><a href="#">test</a> </div>
-                <div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="image/product/apple_logo-60x60.jpg" title="test 3" alt="test 3" /></a><a href="#">test 3</a></div>
-                <div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="image/product/canon_logo-60x60.jpg" title="test 5" alt="test 5" /></a><a href="#">test 5</a> </div>
-                <div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="image/product/canon_logo-60x60.jpg" title="test 6" alt="test 6" /></a><a href="#">test 6</a></div>
-                <div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="image/product/apple_logo-60x60.jpg" title="test 7" alt="test 7" /></a><a href="#">test 7</a> </div>
-                <div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="image/product/canon_logo-60x60.jpg" title="test1" alt="test1" /></a><a href="#">test1</a></div>
-                <div class="col-lg-1 col-md-2 col-sm-3 col-xs-6"><a href="#"><img src="image/product/apple_logo-60x60.jpg" title="test2" alt="test2" /></a><a href="#">test2</a></div>
-              </div>
+            <li class="menu_brands dropdown"><a href="#">Shops &amp; Stores</a>
             </li>
-            <li class="custom-link"><a href="#">Custom Links</a></li>
-            <li class="dropdown wrap_custom_block hidden-sm hidden-xs"><a>Custom Block</a>
-              <div class="dropdown-menu custom_block">
-                <ul>
-                  <li>
-                    <table>
-                      <tbody>
-                        <tr>
-                          <td><img alt="" src="image/banner/cms-block.jpg"></td>
-                          <td><img alt="" src="image/banner/responsive.jpg"></td>
-                          <td><img alt="" src="image/banner/cms-block.jpg"></td>
-                        </tr>
-                        <tr>
-                          <td><h4>CMS Blocks</h4></td>
-                          <td><h4>Responsive Template</h4></td>
-                          <td><h4>Dedicated Support</h4></td>
-                        </tr>
-                        <tr>
-                          <td>This is a CMS block. You can insert any content (HTML, Text, Images) Here.</td>
-                          <td>This is a CMS block. You can insert any content (HTML, Text, Images) Here.</td>
-                          <td>This is a CMS block. You can insert any content (HTML, Text, Images) Here.</td>
-                        </tr>
-                        <tr>
-                          <td><strong><a class="btn btn-primary btn-sm" href="#">Read More</a></strong></td>
-                          <td><strong><a class="btn btn-primary btn-sm" href="#">Read More</a></strong></td>
-                          <td><strong><a class="btn btn-primary btn-sm" href="#">Read More</a></strong></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </li>
-                </ul>
-              </div>
+            <li class="custom-link"><a href="#">Cart</a></li>
+            
+            <li class="dropdown information-link"><a href="#">Login</a>
             </li>
-            <li class="dropdown information-link"><a>Pages</a>
-              <div class="dropdown-menu">
-                <ul>
-                  <li><a href="login.html">Login</a></li>
-                  <li><a href="register.html">Register</a></li>
-                  <li><a href="category.html">Category (Grid/List)</a></li>
-                  <li><a href="product.html">Product</a></li>
-                  <li><a href="cart.html">Shopping Cart</a></li>
-                  <li><a href="checkout.html">Checkout</a></li>
-                  <li><a href="compare.html">Compare</a></li>
-                  <li><a href="wishlist.html">Wishlist</a></li>
-                  <li><a href="search.html">Search</a></li>
-                </ul>
-                <ul>
-                  <li><a href="about-us.html">About Us</a></li>
-                  <li><a href="404.html">404</a></li>
-                  <li><a href="elements.html">Elements</a></li>
-                  <li><a href="faq.html">Faq</a></li>
-                  <li><a href="sitemap.html">Sitemap</a></li>
-                  <li><a href="contact-us.html">Contact Us</a></li>
-                </ul>
-              </div>
-            </li>
-            <li class="contact-link"><a href="contact-us.html">Contact Us</a></li>
-            <li class="custom-link-right"><a href="#" target="_blank">Special Offers</a></li>
+            <li class="custom-link-right"><a href="#" target="_blank"><strong>Pick Ups &amp; Delivery</strong></a></li>
           </ul>
         </div>
       </div>
@@ -566,7 +253,7 @@ a:5:{i:0;s:622:"<!DOCTYPE html>
       <div class="row">
 <!-- ============================================== BODY CONTENT STARTS ============================================== -->
 
-";s:7:"content";N;i:2;s:12274:"
+";s:7:"content";N;i:2;s:9917:"
 
         </div>
     </div>
@@ -630,76 +317,22 @@ a:5:{i:0;s:622:"<!DOCTYPE html>
       <div class="container">
         <div id="powered" class="clearfix">
           <div class="powered_text pull-left flip">
-            <p>Marketshop Ecommerce Template © 2016 | Template By <a href="http://harnishdesign.net" target="_blank">Harnish Design</a></p>
+            <p>Gmanzo Ecommerce © 2016 | Powered By <a href="#" target="_blank">CreativeMeshKernel</a></p>
           </div>
-          <div class="social pull-right flip"> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/socialicons/facebook.png" alt="Facebook" title="Facebook"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/socialicons/twitter.png" alt="Twitter" title="Twitter"> </a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/socialicons/google_plus.png" alt="Google+" title="Google+"> </a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/socialicons/pinterest.png" alt="Pinterest" title="Pinterest"> </a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/socialicons/rss.png" alt="RSS" title="RSS"> </a> </div>
+          <div class="social pull-right flip"> <a href="#" target="_blank"> <img data-toggle="tooltip" src="<?= $this->url->get('assets/image/socialicons/facebook.png') ?>" alt="Facebook" title="Facebook"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="<?= $this->url->get('assets/image/socialicons/twitter.png') ?>" alt="Twitter" title="Twitter"> </a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="<?= $this->url->get('assets/image/socialicons/google_plus.png') ?>" alt="Google+" title="Google+"> </a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="<?= $this->url->get('assets/image/socialicons/pinterest.png') ?>" alt="Pinterest" title="Pinterest"> </a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="<?= $this->url->get('assets/image/socialicons/rss.png') ?>" alt="RSS" title="RSS"> </a> </div>
         </div>
         <div class="bottom-row">
-          <div class="custom-text text-center"> <img alt="" src="image/logo-small.png">
+          <div class="custom-text text-center"> <img alt="" src="<?= $this->url->get('assets/image/logo-small.png') ?>">
             <p>This is a CMS block. You can insert any content (HTML, Text, Images) Here. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
           </div>
-          <div class="payments_types"> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/payment/payment_paypal.png" alt="paypal" title="PayPal"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/payment/payment_american.png" alt="american-express" title="American Express"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/payment/payment_2checkout.png" alt="2checkout" title="2checkout"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/payment/payment_maestro.png" alt="maestro" title="Maestro"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/payment/payment_discover.png" alt="discover" title="Discover"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="image/payment/payment_mastercard.png" alt="mastercard" title="MasterCard"></a> </div>
+          <div class="payments_types"> <a href="#" target="_blank"> <img data-toggle="tooltip" src="<?= $this->url->get('assets/image/payment/payment_paypal.png') ?>" alt="paypal" title="PayPal"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="<?= $this->url->get('assets/image/payment/payment_american.png') ?>" alt="american-express" title="American Express"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="<?= $this->url->get('assets/image/payment/payment_2checkout.png') ?>" alt="2checkout" title="2checkout"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="<?= $this->url->get('assets/image/payment/payment_maestro.png') ?>" alt="maestro" title="Maestro"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="<?= $this->url->get('assets/image/payment/payment_discover.png') ?>" alt="discover" title="Discover"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="<?= $this->url->get('assets/image/payment/payment_mastercard.png') ?>" alt="mastercard" title="MasterCard"></a> </div>
         </div>
       </div>
     </div>
     <div id="back-top"><a data-toggle="tooltip" title="Back to Top" href="javascript:void(0)" class="backtotop"><i class="fa fa-chevron-up"></i></a></div>
   </footer>
   <!--Footer End-->
-  <!-- Facebook Side Block Start -->
-  <div id="facebook" class="fb-left sort-order-1">
-    <div class="facebook_icon"><i class="fa fa-facebook"></i></div>
-    <div class="fb-page" data-href="https://www.facebook.com/harnishdesign/" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true" data-show-posts="false">
-      <div class="fb-xfbml-parse-ignore">
-        <blockquote cite="https://www.facebook.com/harnishdesign/"><a href="https://www.facebook.com/harnishdesign/">Harnish Design</a></blockquote>
-      </div>
-    </div>
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-  </div>
-  <!-- Facebook Side Block End -->
-  <!-- Twitter Side Block Start -->
-  <div id="twitter_footer" class="twit-left sort-order-2">
-    <div class="twitter_icon"><i class="fa fa-twitter"></i></div>
-    <a class="twitter-timeline" href="https://twitter.com/" data-chrome="nofooter noscrollbar transparent" data-theme="light" data-tweet-limit="2" data-related="twitterapi,twitter" data-aria-polite="assertive" data-widget-id="347621595801608192">Tweets by @</a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-  </div>
-  <!-- Twitter Side Block End -->
-  <!-- Video Side Block Start -->
-  <div id="video_box" class="vb-right sort-order-1">
-    <div id="video_box_icon"><i class="fa fa-play"></i></div>
-    <p>
-      <iframe allowfullscreen="" src="//www.youtube.com/embed/SZEflIVnhH8" height="315" width="560"></iframe>
-    </p>
-  </div>
-  <!-- Video Side Block End -->
-  <!-- Custom Side Block Start -->
-  <div id="custom_side_block" class="custom_side_block_right sort-order-2">
-    <div class="custom_side_block_icon"> <i class="fa fa-chevron-right"></i> </div>
-    <table>
-      <tbody>
-        <tr>
-          <td><h2>CMS Blocks</h2></td>
-        </tr>
-        <tr>
-          <td><img alt="" src="image/banner/cms-block.jpg"></td>
-        </tr>
-        <tr>
-          <td>You can add any HTML content to this block or turn it off in Theme Admin panel!</td>
-        </tr>
-        <tr>
-          <td><strong><a href="#">Read More</a></strong></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <!-- Custom Side Block End -->
-</div>
+  
 <!-- ============================================================= FOOTER : END============================================================= -->
 
 <!-- MODAL -->
