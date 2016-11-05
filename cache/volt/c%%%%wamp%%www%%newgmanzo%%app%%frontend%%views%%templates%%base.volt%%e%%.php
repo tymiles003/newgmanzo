@@ -1,4 +1,4 @@
-a:5:{i:0;s:530:"<!DOCTYPE html>
+a:5:{i:0;s:622:"<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -13,7 +13,7 @@ a:5:{i:0;s:530:"<!DOCTYPE html>
 
 	    <title>GMANZO</title>
             <?= $this->assets->outputCss('headers') ?>
-            
+            <link href="https://fonts.googleapis.com/css?family=Droid+Sans|Open+Sans" rel="stylesheet"> 
             ";s:4:"head";a:1:{i:0;a:4:{s:4:"type";i:357;s:5:"value";s:1:" ";s:4:"file";s:60:"C:\wamp\www\newgmanzo\app/frontend/views/templates/base.volt";s:4:"line";i:17;}}i:1;s:28732:"
 	    
 		
