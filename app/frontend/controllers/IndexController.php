@@ -26,6 +26,7 @@ class IndexController extends BaseController{
     }
     
     public function indexAction(){
+        $counter    = 1;
         $category   = Category::find()->toArray();
         $available  = Category::find(array('limit'=>6))->toArray();
         $keysflow   = array('electronics','automobile','women','men','kids','digits');
@@ -36,16 +37,14 @@ class IndexController extends BaseController{
             'category'      => $category,
             'available'     => $available,
             'helper'        => $this->component->helper,
-            'electronics'   => Products::find('category=1')->toArray(),
-            'automobile'    => Products::find('category=2')->toArray(),
-            'women'         => Products::find('category=3')->toArray(),
-            'men'           => Products::find('category=4')->toArray(),
-            'kids'          => Products::find('category=5')->toArray(),
-            'digits'        => Products::find('category=6')->toArray(),
-            'products'      => Products::find(array('limit'=>20,
-                'order' => 'RAND()'))->toArray(),
         ));
-        //$this->view->products   = Products::find(array('limit'))->toArray();
+        foreach($available as $keys => $values){
+            $this->view->setVar('tab_cat'.$counter,
+                    Products::find('category='.$counter)->toArray());
+            $counter++;
+        }
+        $this->view->setVars(array('products' => Products::find(
+                array('limit'=>20,'order' => 'RAND()'))->toArray()));
         $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_LAYOUT);
         return;
     }
