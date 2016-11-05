@@ -100,10 +100,9 @@
                 <input type="hidden" id="item{{keys+1}}_pro_id" value="{{values['product_id']}}">
               </div>
               <div class="button-group">
-                <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
+                <button class="btn-primary addToCart" id="item{{keys+1}}" type="button" onClick=""><span>Add to Cart</span></button>
                 <div class="add-to-links">
                   <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
-                  <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
                 </div>
               </div>
             </div>
@@ -132,20 +131,23 @@
               <div id="tab-cat1" class="tab_content">
                 <div class="owl-carousel latest_category_tabs">
                 {% for keys,values in tab_cat1 %}
-                  <div class="product-thumb">
+                  <div class="product-thumb" id="item{{keys+1}}">
                     <div class="image">
                         <a href="detail.html"><img  src="{{url('assets/uploads/'~values['front_image'])}}" class="img-responsive" alt="{{values['title'] | capitalize}}"></a>
                     </div>
                     <div class="caption">
                       <h4><a href="product.html">{{values['title'] | capitalize}}</a></h4>
-                      <p class="price"> <span class="price-new">${{values['sale_price']}}</span> <span class="price-old">$0</span> <span class="saving">-5%</span> </p>
+                      <p class="price"> <span class="price-new">${{values['sale_price']}}</span> <span class="price-old">$0</span> <span class="saving">-5%</span> 
+                        <input type="hidden" id="item{{keys+1}}_name" value="{{values['title'] | capitalize}}">
+                        <input type="hidden" id="item{{keys+1}}_price" value="{{values['sale_price']}}">
+                        <input type="hidden" id="item{{keys+1}}_pro_id" value="{{values['product_id']}}">
+                      </p>
                       <div class="rating">By {{convert(values['added_by'],'display_name')}} | {{address(values['added_by'],'address1') | capitalize}}</div>
                     </div>
                     <div class="button-group">
-                      <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
+                      <button class="btn-primary addToCart" id="item{{keys+1}}" type="button" onClick=""><span>Add to Cart</span></button>
                       <div class="add-to-links">
                         <button type="button" data-toggle="tooltip" title="Add to wishlist" onClick=""><i class="fa fa-heart"></i></button>
-                        <button type="button" data-toggle="tooltip" title="Add to compare" onClick=""><i class="fa fa-exchange"></i></button>
                       </div>
                     </div>
                   </div>

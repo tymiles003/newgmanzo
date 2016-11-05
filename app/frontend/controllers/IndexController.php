@@ -29,7 +29,6 @@ class IndexController extends BaseController{
         $counter    = 1;
         $category   = Category::find()->toArray();
         $available  = Category::find(array('limit'=>6))->toArray();
-        $keysflow   = array('electronics','automobile','women','men','kids','digits');
         //shuffle($keysflow);
         //Products::__convert('{"type":"vendor","id":"1"}');
         $this->view->setVars(array(

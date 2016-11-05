@@ -665,7 +665,7 @@
                 <input type="hidden" id="item<?= $keys + 1 ?>_pro_id" value="<?= $values['product_id'] ?>">
               </div>
               <div class="button-group">
-                <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
+                <button class="btn-primary addToCart" id="item<?= $keys + 1 ?>" type="button" onClick=""><span>Add to Cart</span></button>
                 <div class="add-to-links">
                   <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
                   <button type="button" data-toggle="tooltip" title="Compare this Product" onClick=""><i class="fa fa-exchange"></i></button>
@@ -697,19 +697,22 @@
               <div id="tab-cat1" class="tab_content">
                 <div class="owl-carousel latest_category_tabs">
                 <?php foreach ($tab_cat1 as $keys => $values) { ?>
-                  <div class="product-thumb">
+                  <div class="product-thumb" id="item<?= $keys + 1 ?>">
                     <div class="image">
                         <a href="detail.html"><img  src="<?= $this->url->get('assets/uploads/' . $values['front_image']) ?>" class="img-responsive" alt="<?= ucwords($values['title']) ?>"></a>
                     </div>
                     <div class="caption">
                       <h4><a href="product.html"><?= ucwords($values['title']) ?></a></h4>
-                      <p class="price"> <span class="price-new">$<?= $values['sale_price'] ?></span> <span class="price-old">$0</span> <span class="saving">-5%</span> </p>
+                      <p class="price"> <span class="price-new">$<?= $values['sale_price'] ?></span> <span class="price-old">$0</span> <span class="saving">-5%</span> 
+                        <input type="hidden" id="item<?= $keys + 1 ?>_name" value="<?= ucwords($values['title']) ?>">
+                        <input type="hidden" id="item<?= $keys + 1 ?>_price" value="<?= $values['sale_price'] ?>">
+                        <input type="hidden" id="item<?= $keys + 1 ?>_pro_id" value="<?= $values['product_id'] ?>">
+                      </p>
                       <div class="rating">By <?= Multiple\Frontend\Models\Products::__convert($values['added_by'], 'display_name') ?> | <?= ucwords(Multiple\Frontend\Models\Products::__getAddress($values['added_by'], 'address1')) ?></div>
                     </div>
                     <div class="button-group">
-                      <button class="btn-primary" type="button" onClick=""><span>Add to Cart</span></button>
+                      <button class="btn-primary addToCart" id="item<?= $keys + 1 ?>" type="button" onClick=""><span>Add to Cart</span></button>
                       <div class="add-to-links">
-                        <button type="button" data-toggle="tooltip" title="Add to wishlist" onClick=""><i class="fa fa-heart"></i></button>
                         <button type="button" data-toggle="tooltip" title="Add to compare" onClick=""><i class="fa fa-exchange"></i></button>
                       </div>
                     </div>
