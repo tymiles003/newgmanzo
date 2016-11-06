@@ -1,18 +1,15 @@
 <!-- ============================================== BRANDS CAROUSEL ============================================== -->
-<div id="brands-carousel" class="logo-slider wow fadeInUp">
+<div id="manufacturer-info" class="logo-slider wow fadeInUp">
 
-		<h3 class="section-title"><?php echo @$this->session->get('strLocation'); ?>  STORE CATEGORIES</h3>
-		<div class="logo-slider-inner-text">	
-			<div id="brand-slider" class="owl-carousel brand-slider custom-carousel-text owl-theme">
-                                {% for keys, values in category %}
-				<div class="text-item">
-					<a href="{{url('stores/browse/?strLocation='~this.session.get('strLocation')~'&goto='~values['category_id'])}}" class="image">
-						{{values['category_name'] | upper}}
-					</a>	
-				</div><!--/.item-->
-                                {% endfor %}
-		    </div><!-- /.owl-carousel #logo-slider -->
-		</div>
+		<h3 class="title"><?php echo @$this->session->get('strLocation'); ?>  Stores</h3>
+		<div class="row">
+                    {% for keys, values in vendors %}
+                    <div class="col-sm-2 col-xs-6 manufacturer">
+                            <a href="#" class="thumbnail"><img alt="Apple" title="Apple" src="image/product/apple_logo-60x60.jpg"></a>
+                        <a href="#">Apple</a>
+                    </div>
+                    {% endfor %}
+              </div>
 	
 </div><!-- /.logo-slider -->
 <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->

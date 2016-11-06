@@ -20,9 +20,10 @@ class SetlocalController extends BaseController{
         $response    = new \Phalcon\Http\Response();
         if($this->request->isPost() && $this->request->isAjax()){
             $response->setRawHeader("HTTP/1.1 200 OK");
-            $this->session->set('strLocation', $this->request->getPost('state'));
+            $state  = strtolower($this->request->getPost('state'));
             $response->setHeader('Content-Type', 'application/json');
             $response->setJsonContent(array("status" => "OK"));
+            $this->session->set('strLocation', $state);
         }
         $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_NO_RENDER);
         $response->sendHeaders(); $response->send();

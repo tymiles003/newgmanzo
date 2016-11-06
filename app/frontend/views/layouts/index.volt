@@ -239,4 +239,28 @@
           <!-- Brand Logo Carousel End -->
         </div>
         <!--Middle Part End-->
+
+<!-- MODAL -->
+<div id="myModalState" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <img src="{{url('assets/images/logo.png')}}" alt="">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><strong>&nbsp;</strong></h4>
+      </div>
+      <div class="modal-body">
+        <p>
+        <input type="text" class="form-control input-lg" id="input-location" placeholder="Enter you location" name="location" />
+        <!--<button type="button" class="btn btn-block btn-lg btn-primary"><strong><small>Display Shops</small></strong></button>-->
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="lnk btn" data-dismiss="modal" style="background:none;">Close Window</button>
+        <!--<button type="button" class="lnk btn btn-lg" style="background:white; border:1px solid #444; color:#444;"><strong>Display Shops</strong></button>-->
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 {% endblock %}

@@ -24,55 +24,25 @@ class StoresController extends BaseController{
     public function initialize() {
         parent::initialize();
         \Phalcon\Tag::appendTitle('Stores');
-        if($this->request->hasQuery('task')){
-            $this->session->set(
-                    'store-name', $this->request->getQuery('task'));
-        }
-        if($this->session->has('strLocation')){
-            $vendors    = Vendor::find('address1="'.
-                    $this->session->get('strLocation').'"')->toArray();
-            if($vendors != false){
-                $this->view->setVars(array('vendors' => $vendors));
-            }
-            else{
-                $this->view->setVars(array('notAvailable' => true));
-            }
-        }
         $this->view->setVar('category', Category::find()->toArray());
         $this->view->setVar('helper', $this->component->helper);
     }
     
     public function indexAction(){
         $this->session->remove('cart_item');
-                //$this->session->remove('cart_item');
-        $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_LAYOUT);
+        $state  = strtolower($this->session->get('strLocation'));
+        $vendor = Vendor::find('address1="' . $state . '"')->toArray();
+        $vendor ? $this->view->setVar('vendors', $vendor) : $this->view
+                                           ->setVar('notAvailable',true);
+        $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_AFTER_TEMPLATE);
+        $this->view->setVar('category', Category::find()->toArray());
+        $this->view->setVar('helper', $this->component->helper);
         return;
     }
     
     public function beforeExecuteRoute(Dispatcher $dispatcher){
         $action     = $dispatcher->getActionName();
         $controller = $dispatcher->getControllerName();
-        
-        if($this->request->hasQuery('task')){
-            $shop_id    = $this->request->getQuery('task', 'int');
-            $this->session->set('v_id', $shop_id);
-        }
-        
-        if($controller == 'stores' && $action == 'index'){
-            if(!$this->session->has('strLocation')){
-                return $dispatcher->forward(array(
-                    'action'    => 'package'
-                ));
-            }
-        }
-        elseif($controller == 'stores' && $action == 'browse'){
-            //$this->session->remove('cart_item');
-            if(!$this->session->has('strLocation')){
-                return $dispatcher->forward(array(
-                    'action'    => 'package'
-                ));
-            }
-        }
     }
     
     public function afterExecuteRoute(Dispatcher $dispatcher){
@@ -81,8 +51,7 @@ class StoresController extends BaseController{
     
     public function detailsAction($id=""){
         if(empty($id) && !is_null($id)){
-            $this->response->redirect(
-                    'stores/?strLocation='.$this->session->get('strLocation'));
+            $this->response->redirect('stores/?strLocation='.$this->session->get('strLocation'));
             $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_NO_RENDER);
             return;
         }
@@ -94,41 +63,7 @@ class StoresController extends BaseController{
     }
 
     public function browseAction(){
-        if($this->request->hasQuery('task') && !$this->request->has('goto')){
-            $this->view->setVars(array(
-                'id'    => $this->request->getQuery('task'),
-                'name'  => $this->request->getQuery('display')
-            ));
-            $this->session->set('store-name', $this->request->getQuery('task'));
-            $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_ACTION_VIEW);
-            return;
-        }
-        if($this->session->has('store-name') && !$this->request->has('goto')){
-            $store_id   = $this->session->get('store-name');
-            $type       = json_encode(array('type' => 'vendor','id' => $store_id));
-            $products   = Products::find("added_by='".$type."'")->toArray();
-            if($products){
-                $this->view->setVars(array('products' => $products));
-            }
-            $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_ACTION_VIEW);
-            return;
-        }
-        elseif($this->session->has('store-name') && $this->request->has('goto')){
-            $store_id   = $this->session->get('store-name');
-            $type       = json_encode(array('type' => 'vendor','id' => $store_id));
-            $products   = Products::find("added_by='".$type."' AND category='".(int)
-                    $this->request->getQuery('goto')."'")->toArray();
-            if($products){
-                $this->view->setVars(array('products' => $products));
-            }
-            $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_ACTION_VIEW);
-            return;
-        }
-        else{
-            $this->view->setVars(array('products' => Products::find()->toArray()));
-            $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_ACTION_VIEW);
-            return;
-        }
+        
     }
     
     public function packageAction(){
