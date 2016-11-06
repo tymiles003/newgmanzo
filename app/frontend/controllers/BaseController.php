@@ -28,6 +28,7 @@ class BaseController extends Controller{
                 ->addCss('assets/css/owl.theme.css')
                 ->addCss('assets/css/responsive.css')
                 ->addCss('assets/css/stylesheet-skin3.css')
+                ->addCss('assets/css/jquery.autocomplete.css')
                 ->addCss('assets/css/rateit.css')
                 ->addCss('http://fonts.googleapis.com/css?family=Droid+Sans', true);
         
@@ -46,6 +47,7 @@ class BaseController extends Controller{
                 ->addJs('assets/js/datepicker_beta/jquery.datetimepicker.full.min.js')
                 ->addJs('assets/js/jquery.easing-1.3.min.js')
                 ->addJs('assets/js/owl.carousel.min.js')
+                ->addJs('assets/js/jquery.autocomplete.js')
                 ->addJs('assets/js/bootbox.js')
                 ->addJs('assets/js/jquery.dcjqaccordion.min.js')
                 ->addJs('assets/js/jquery.easing-1.3.min.js')

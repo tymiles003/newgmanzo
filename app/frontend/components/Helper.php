@@ -37,8 +37,30 @@ class Helper extends \Phalcon\Mvc\User\Component{
         return;
     }
     
-    public function fileCreateUrl($url=''){
-        
+    //Read csv file to array
+    public function getContents($file){
+        $array = array();
+        if(is_readable($file)){
+            $fileHandler = fopen($file, 'r');
+            while(!feof($fileHandler)){
+                $array[] = fgets($fileHandler);
+            }
+            fclose($fileHandler);
+            return $array;
+        }
+    }
+    
+    //Read csv file to array
+    public function getContentsCSV($csvfile){
+        $array = array();
+        if(is_readable($csvfile)){
+            $file = fopen($csvfile, 'r');
+            while(($line = fgetcsv($file)) !== FALSE){
+                $array[] = $line[0];
+            }
+            fclose($file);
+            return $array;
+        }
     }
     
     //Used for the json helpper errors;

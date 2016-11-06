@@ -48,11 +48,24 @@ class IndexController extends BaseController{
         return;
     }
     
-    public function show404(){
+    public function getStringStatesAction(){
+        $helper     = $this->component->helper;
+        $response   = new \Phalcon\Http\Response();
+        $returns    = $helper->getContentsCSV('assets/files/states.csv');
+        if($this->request->isAjax()){
+            $response->setHeader('Content-Type', 'application/json');
+            $response->setJsonContent($returns);
+            $response->send();
+        }
+        $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_NO_RENDER);
+        return;
+    }
+    
+    public function show404Action(){
         
     }
     
-    public function show409(){
+    public function show409Action(){
         
     }
     

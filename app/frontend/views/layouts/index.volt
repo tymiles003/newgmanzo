@@ -1,65 +1,7 @@
 {% extends "templates/base.volt" %}
 
 {% block head %}
-<style type="text/css">
-/**
- * Extra large button extensions. Extends `.btn`.
- */
-.btn-block {
-    padding: 18px 28px;
-    /*font-size: 22px;*/
-    line-height: normal;
-    -webkit-border-radius: 0px;
-       -moz-border-radius: 0px;
-            border-radius: 0px;
-    box-shadow:#ccc 0 3px 3px 0;
-}
 
-#myModal {
-   /**background: #3498db !important;**/
-   background: #fafafa !important;
-   /**opacity: .80;
-   filter: Alpha(Opacity=80);**/
-}
-
-.modal-header, .modal-footer {
-  text-align: center;
-  padding: 20px !important;
-  border: none !important;
-}
-
-.modal-title {
-    /**color: white !important;**/
-}   
-
-.modal-content {
-    background: none !important;
-    box-shadow: none !important;
-    border: none !important;
-}
-
-.select-style {
-    border: 5px solid #f90 !important;
-    border-radius: 3px !important;
-    overflow: hidden !important;
-    background: #fafafa url("data:image/png;base64,R0lGODlhDwAUAIABAAAAAP///yH5BAEAAAEALAAAAAAPABQAAAIXjI+py+0Po5wH2HsXzmw//lHiSJZmUAAAOw==") no-repeat 90% 50% !important;
-}
-
-.select-style select {
-    padding: 15px 18px !important;
-    width: 105% !important;
-    height: 60px;
-    border: none !important;
-    box-shadow: none !important;
-    background: transparent !important;
-    background-image: none !important;
-    -webkit-appearance: none !important;
-}
-
-.select-style select:focus {
-    outline: none !important;
-}
-</style>
 {% endblock %}
 {% block content %}
     <!--Middle Part Start-->
