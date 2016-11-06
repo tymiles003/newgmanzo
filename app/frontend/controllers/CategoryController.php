@@ -13,7 +13,7 @@
  */
 namespace Multiple\Frontend\Controllers;
 
-use Phalcon\Mvc\View;
+//use Phalcon\Mvc\View;
 use Multiple\Frontend\Models\Products;
 use Multiple\Frontend\Models\Category;
 
@@ -29,19 +29,11 @@ class CategoryController extends BaseController{
         $this->view->setVar('category', $category);
     }
     
-    public function indexAction($id = ''){
-        $category   = null;
-        $category   = !empty($id) ? $id : $this->request->getQuery('cat');
-        $products   = Products::find('category="'.$category.'"')->toArray();
-        if($products){
-            $this->view->setVar('categoryName', 
-                    Category::findFirstByCategory_id($category));
-            $this->view->setRenderLevel(View::LEVEL_ACTION_VIEW);
-            $this->view->setVar('products', $products);
-            return;
-        }
-        $this->view->setRenderLevel(View::LEVEL_NO_RENDER);
-        $this->response->redirect('index?task=move');
+    public function indexAction(){
+        $params = $this->request->getQuery();
+        $this->view->pager  = Products::getList($params);
+        $this->view->cat    = Category::findFirstByCategory_id($params['cat']);
+        $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_ACTION_VIEW);
         return;
     }
 }

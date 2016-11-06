@@ -29,6 +29,8 @@ class Module implements ModuleDefinitionInterface{
             'Multiple\Frontend\Plugins'     => '../app/frontend/plugins/',
             'Multiple\Frontend\Config'      => '../app/frontend/config/',
             'Multiple\Frontend\Component'   => '../app/frontend/components/',
+            'TableSort'                     => __DIR__ . '/../../vendor/mattdanger/phalcon-table-sort/src/TableSort/',
+            'VoltHelpers'                   => __DIR__ . '/../../vendor/mattdanger/volt-helpers/src/VoltHelpers/',
         ));
         $loader->register();
     }
@@ -93,6 +95,15 @@ class Module implements ModuleDefinitionInterface{
             $compiler->addFunction('address', function($resolveArgs, $exprArgs){
                 //use $resolvedArgs to pass the arguments exactly as 
                 return 'Multiple\Frontend\Models\Products::__getAddress('.$resolveArgs.')';
+            });
+            $compiler->addFunction('sortLink', function($resolveArgs, $exprArgs){
+                return '\TableSort\Sort::sortLink('.$resolveArgs.')';
+            });
+            $compiler->addFunction('sortIcon', function($resolveArgs, $exprArgs){
+                return '\TableSort\Sort::sortIcon('.$resolveArgs.')';
+            });
+            $compiler->addFunction('paginationPath', function($resolveArgs, $exprArgs){
+                return '\VoltHelpers\Helpers::paginationPath('.$resolveArgs.')';
             });
             return $volt;
         }, true);

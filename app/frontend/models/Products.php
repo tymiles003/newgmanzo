@@ -70,7 +70,19 @@ class Products extends BaseModel{
 
     public static function getList($params){
         //Query default values
+        $sort = $params['sort'] ?: 'r.title';
+        $order = $params['order'] ?: 'ASC';
+        $page   = (int) $params['page'] ?: 1;
+        $limit  = $params['limit'] ?: 8;
         
+        //Create the builder paging query
+        $builder    = \Phalcon\Di::getDefault()
+                ->getModelsManager()->createBuilder()
+                ->from(array('r' => 'Multiple\Frontend\Models\Products'))
+                ->where('r.category = '.$params['cat'])->orderBy("$sort $order");
+        $paginator  = new PaginatorQueryBuilder(array(
+            'builder' => $builder, 'limit' => $limit, 'page' => $page));
+        return $paginator;
     }
     
     public function validation(){
