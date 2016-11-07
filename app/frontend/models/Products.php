@@ -68,7 +68,7 @@ class Products extends BaseModel{
         return $stackProduct;
     }
 
-    public static function getList($params){
+    public static function getList($params, $others=NUll){
         //Query default values
         $sort = $params['sort'] ?: 'r.title';
         $order = $params['order'] ?: 'ASC';
@@ -80,6 +80,41 @@ class Products extends BaseModel{
                 ->getModelsManager()->createBuilder()
                 ->from(array('r' => 'Multiple\Frontend\Models\Products'))
                 ->where('r.category = '.$params['cat'])->orderBy("$sort $order");
+        $paginator  = new PaginatorQueryBuilder(array(
+            'builder' => $builder, 'limit' => $limit, 'page' => $page));
+        return $paginator;
+    }
+    
+    public static function __getCategoryProduct($where, array $others=NULL){
+        $builder    = \Phalcon\Di::getDefault()->getModelsManager()
+                ->createBuilder()->from('Multiple\Frontend\Models\Products')
+                ->where('Multiple\Frontend\Models\Products.category = '.$where);
+        if(!is_null($others) && !empty($others) && is_array($others)){
+            foreach($others as $keys => $values){
+                $builder->andWhere('Multiple\Frontend\Models\Products.'.$keys.' = "'.$values.'"');
+            }
+        }
+        $builderStackFlow   = $builder->limit(10)->getQuery()->execute();
+        return count($builderStackFlow) > 0 ? $builderStackFlow : array();
+    }
+    
+    public static function __getCatProBuilder($params, array $others=NULL){
+        //Query default values
+        $sort = $params['sort'] ?: 'title';
+        $order = $params['order'] ?: 'ASC';
+        $page   = (int) $params['page'] ?: 1;
+        $limit  = $params['limit'] ?: 8;
+        
+        //Create the builder paging query
+        $builder    = \Phalcon\Di::getDefault()->getModelsManager()
+                ->createBuilder()->from('Multiple\Frontend\Models\Products')
+                ->where('Multiple\Frontend\Models\Products.category = '.$params['cat']);
+        if(!is_null($others) && !empty($others) && is_array($others)){
+            foreach($others as $keys => $values){
+                $builder->andWhere('Multiple\Frontend\Models\Products.'.$keys.' = "'.$values.'"');
+            }
+        }
+        $builder->limit(10)->orderBy("$sort $order");
         $paginator  = new PaginatorQueryBuilder(array(
             'builder' => $builder, 'limit' => $limit, 'page' => $page));
         return $paginator;

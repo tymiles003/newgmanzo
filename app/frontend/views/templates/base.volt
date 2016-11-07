@@ -172,7 +172,7 @@
         <div class="table-container">
           <!-- Logo Start -->
           <div class="col-table-cell col-lg-4 col-md-4 col-sm-12 col-xs-12 inner">
-            <div id="logo"><a href="index.html"><img class="img-responsive" src="{{url('assets/image/logo.png')}}" title="GMANZO" alt="GMANZO" /></a></div>
+            <div id="logo"><a href="{{url('index?task=home')}}"><img class="img-responsive" src="{{url('assets/image/logo.png')}}" title="GMANZO" alt="GMANZO" /></a></div>
           </div>
           <!-- Logo End -->
           <!-- Search Start-->
@@ -222,7 +222,7 @@
         <div class="navbar-header"> <span class="visible-xs visible-sm"> Menu <b></b></span></div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
-            <li><a class="home_link" title="Home" href="index.html"><span>Home</span></a></li>
+            <li><a class="home_link" title="Home" href="{{url('index?task=home')}}"><span>Home</span></a></li>
             <li class="dropdown"><a>Shop by Categories</a>
               <div class="dropdown-menu">
                 <ul>
@@ -233,9 +233,9 @@
                 </ul>
               </div>
             </li>
-            <li class="menu_brands dropdown"><a href="#">Shops &amp; Stores</a>
+            <li class="menu_brands dropdown"><a href="{{url('stores')}}">Shops &amp; Stores</a>
             </li>
-            <li class="custom-link"><a href="#">Cart</a></li>
+            <li class="custom-link"><a href="{{url('checkout')}}">Cart</a></li>
             
             <li class="dropdown information-link"><a href="#">Login</a>
             </li>
@@ -338,33 +338,55 @@
 {{ this.assets.outputJs('footers') }}
 <script type="text/javascript">
     $(window).load(function(){
-        $('#myModalState').modal('show');
-        $('.dropdown-toggle').dropdown();
-        $('#myModalState').on('shown.bs.modal', function () {
-            $('#input-location').focus();
-            $('#input-location').autocomplete({
-                source: [function(q, add){
-                    $.getJSON('http://localhost/newgmanzo/index/getStringStates?s='+encodeURIComponent(q),function(data){
-                        add(data);
-                    });
-                }
-            ]}).on('selected.xdsoft', function(e, datum){
-                var selectedState   = datum.split(' ');
-                $.post('http://localhost/newgmanzo/setlocal',{state:selectedState[0]}, function(data){
-                    var stringJSON  = $.parseJSON(JSON.stringify(data));
-                    if(stringJSON.status == 'OK'){
-                        window.location.href = 'http://localhost/newgmanzo/stores/?state='+selectedState[0];
+        var stringPath  = window.location.pathname;
+        var splitString = stringPath.split('/');
+        if(splitString[2] !== 'stores'){
+            $('#myModalState').modal('show');
+            $('.dropdown-toggle').dropdown();
+            $('#myModalState').on('shown.bs.modal', function () {
+                $('#input-location').focus();
+                $('#input-location').autocomplete({
+                    source: [function(q, add){
+                        $.getJSON('http://localhost/newgmanzo/index/getStringStates?s='+encodeURIComponent(q),function(data){
+                            add(data);
+                        });
                     }
-                })
-            });
-        })
+                ]}).on('selected.xdsoft', function(e, datum){
+                    var selectedState   = datum.split(' ');
+                    $.post('http://localhost/newgmanzo/setlocal',{state:selectedState[0]}, function(data){
+                        var stringJSON  = $.parseJSON(JSON.stringify(data));
+                        if(stringJSON.status == 'OK'){
+                            window.location.href = 'http://localhost/newgmanzo/stores/?state='+selectedState[0];
+                        }
+                    })
+                });
+            })
+        }
     });
 
     $(document).ready(function(){
-        $('#stateModal').click(function(evt){
-            evt.preventDefault();
+        $('button#location').click(function(){
             $('#myModalState').modal('show');
-        })
+            $('.dropdown-toggle').dropdown();
+            $('#myModalState').on('shown.bs.modal', function () {
+                $('#input-location').focus();
+                $('#input-location').autocomplete({
+                    source: [function(q, add){
+                        $.getJSON('http://localhost/newgmanzo/index/getStringStates?s='+encodeURIComponent(q),function(data){
+                            add(data);
+                        });
+                    }
+                ]}).on('selected.xdsoft', function(e, datum){
+                    var selectedState   = datum.split(' ');
+                    $.post('http://localhost/newgmanzo/setlocal',{state:selectedState[0]}, function(data){
+                        var stringJSON  = $.parseJSON(JSON.stringify(data));
+                        if(stringJSON.status == 'OK'){
+                            window.location.href = 'http://localhost/newgmanzo/stores/?state='+selectedState[0];
+                        }
+                    })
+                });
+            })
+        });
     })
 </script>
 </body>

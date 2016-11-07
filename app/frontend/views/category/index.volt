@@ -3,6 +3,7 @@
 {% block head %}
 {% endblock %}
 {% block content %}
+{% if stripper is not defined %}
     <!--Left Part Start -->
         <aside id="column-left" class="col-sm-3 hidden-xs">
           <h3 class="subtitle">Categories</h3>
@@ -101,4 +102,7 @@
           </div>
         </div>
         <!--Middle Part End -->
+{% else %}
+
+{% endif %}
 {% endblock %}

@@ -46,11 +46,6 @@ class Module implements ModuleDefinitionInterface{
             return $config;
         });
 
-    //    //Return API config
-    //    $di->setShared('api', function() use ($api){
-    //        return $api;
-    //    });
-
         //Database connection Dependencies
         $di->set('db', function() use ($di){
             $dbConfig = $di->get('config')->get('db')->toArray();
@@ -87,21 +82,32 @@ class Module implements ModuleDefinitionInterface{
             $volt = new \Phalcon\Mvc\View\Engine\Volt($view, $di);
             $volt->setOptions(array('compiledPath' => APP_PATH . 'cache/volt/'));
             $compiler = $volt->getCompiler();
+            
             $compiler->addFunction('jsonDecoder', 'json_decode');
+            
             $compiler->addFunction('convert', function($resolveArgs, $exprArgs){
                 //use $resolvedArgs to pass the arguments exactly as 
                 return 'Multiple\Frontend\Models\Products::__convert('.$resolveArgs.')';
             });
+            
             $compiler->addFunction('address', function($resolveArgs, $exprArgs){
                 //use $resolvedArgs to pass the arguments exactly as 
                 return 'Multiple\Frontend\Models\Products::__getAddress('.$resolveArgs.')';
             });
+            
+            $compiler->addFunction('getCategoryProduct', function($resolveArgs, $exprArgs){
+                //use $resolvedArgs to pass the arguments exactly as 
+                return 'Multiple\Frontend\Models\Products::__getCategoryProduct('.$resolveArgs.')';
+            });
+            
             $compiler->addFunction('sortLink', function($resolveArgs, $exprArgs){
                 return '\TableSort\Sort::sortLink('.$resolveArgs.')';
             });
+            
             $compiler->addFunction('sortIcon', function($resolveArgs, $exprArgs){
                 return '\TableSort\Sort::sortIcon('.$resolveArgs.')';
             });
+            
             $compiler->addFunction('paginationPath', function($resolveArgs, $exprArgs){
                 return '\VoltHelpers\Helpers::paginationPath('.$resolveArgs.')';
             });

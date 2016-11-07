@@ -140,48 +140,81 @@ ul.departments-list li{
 </style>
 {% endblock %}
 {% block content %}
-    <!--Middle Part Start-->
-        <div id="content" class="col-xs-12">
+
+    
+        
+        <!--Middle Part Start-->
+        <div id="content" class="col-sm-10">
         <p>&nbsp;</p>
         <div class="logo"><img src="{{url('assets/image/vendor/'~vendors.vendor_logo)}}" /></div>
         <p>&nbsp;</p>
         <div class="btn-group"><button class="btn btn-lg btn-demo" type="button" data-toggle="modal" data-target="#myModal"><small>Departments</small></button><a href="{{url('stores/?state='~session.get('strLocation'))}}" class="btn btn-lg btn-primary"><small>Change Store</small></a></div><button class="btn btn-lg pull-right btn-link" id="location"><i class="fa fa-map-marker fa-2x"></i></button>
         <p>&nbsp;</p>
-        {% for category_key,category_value in category %}
-          <!-- Bestsellers Product Start-->
-
-          {% set products = getCategoryProduct(category_value['category_id'], others) %}
           
-          <h4 class="subtitle"><strong>{{category_value['category_name'] | upper}}</strong></h4>
-          <div class="owl-carousel product_carousel">
-          <?php if(count($products) > 0){ ?>
-          {% for keys,values in products %}
-            <div class="product-thumb clearfix" id="item{{keys+1}}">
-              <div class="image">
-                <a href="{{url('store/details/'~values.product_id)}}"><img  src="{{url('assets/uploads/'~values.front_image)}}" class="img-responsive" /></a>
+          <div class="product-filter">
+            <div class="row">
+              <div class="col-md-4 col-sm-5">
+                <div class="btn-group">
+                  <button type="button" id="list-view" class="btn btn-default" data-toggle="tooltip" title="List"><i class="fa fa-th-list"></i></button>
+                  <button type="button" id="grid-view" class="btn btn-default" data-toggle="tooltip" title="Grid"><i class="fa fa-th"></i></button>
+                </div>
+                <a href="compare.html" id="compare-total">Product (0)</a> </div>
+              
+              <div class="col-sm-5 text-right">
+                <label class="control-label" for="input-limit">Show:</label>
               </div>
-              <div class="caption">
-                <h4><a href="{{url('store/details/'~values.product_id)}}"><a href="detail.html" style="color:#333;">{{values.title | capitalize}}</a></a></h4>
-                <p class="price"> ${{values.sale_price}} </p>
-                <div class="rating">By {{convert(values.added_by,'display_name')}} | {{address(values.added_by,'address1') | capitalize}}</div>
-                <input type="hidden" id="item{{keys+1}}_name" value="{{values.title | capitalize}}">
-                <input type="hidden" id="item{{keys+1}}_price" value="{{values.sale_price}}">
-                <input type="hidden" id="item{{keys+1}}_pro_id" value="{{values.product_id}}">
+              <div class="col-sm-2 text-right">
+                <select id="input-limit" class="form-control">
+                  <option value="" selected="selected">20</option>
+                  <option value="">25</option>
+                  <option value="">50</option>
+                  <option value="">75</option>
+                  <option value="">100</option>
+                </select>
               </div>
-              <div class="button-group">
-                <button class="btn-primary addToCart" id="item{{keys+1}}" type="button" onClick=""><span>Add to Cart</span></button>
-                <div class="add-to-links">
-                  <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i></button>
+            </div>
+          </div>
+          <br />
+          <div class="row products-category">
+          {% for keys,values in pager.getPaginate().items %}
+            <div class="product-layout product-list col-xs-12">
+              <div class="product-thumb">
+                    <div class="image">
+                        <a href="product.html">
+                            <img alt="{{values.title | capitalize}}" id="item{{keys+1}}_img" src="{{url('assets/uploads/'~values.front_image)}}" class="img-responsive" />
+                        </a>
+                        
+                        <input type="hidden" id="item{{keys+1}}_name" value="{{values.title | capitalize}}">
+                        <input type="hidden" id="item{{keys+1}}_price" value="{{values.sale_price}}">
+                        <input type="hidden" id="item{{keys+1}}_pro_id" value="{{values.product_id}}">
+                    </div>
+                <div>
+                  <div class="caption">
+                    <h4><a href="product.html"> {{values.title | capitalize}} </a></h4>
+                    <p class="description"> {{values.description | capitalize}}</p>
+                    <div class="rating"><small>By {{convert(values.added_by,'display_name')}} | {{address(values.added_by,'address1') | capitalize}}</small></div>
+                    <p class="price"> <span class="price-new">${{values.sale_price}}</span> <span class="price-old">$0</span> <span class="saving">0%</span> <span class="price-tax"></span> </p>
+                  </div>
+                  <div class="button-group">
+                    <button class="btn-primary addToCart" type="button" onClick=""><span>Add to Cart</span></button>
+                    <div class="add-to-links">
+                      <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i> <span>Add to Wish List</span></button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
             {% endfor %}
-            <?php } else{ ?>
-            <div class="alert alert-warning"><strong>Not Available For Now!</strong></div>
-            <?php }; ?>
           </div>
-          {% endfor %}
+          <div class="row">
+            {{ partial('partials/pagination', [
+                'page': pager.getPaginate(),
+                'limit': pager.getLimit()
+              ])
+            }}
+          </div>
         </div>
+        <!--Middle Part End -->
 
 <!-- MODAL -->
 <div id="myModalState" class="modal fade" tabindex="-1" role="dialog">
@@ -231,7 +264,5 @@ ul.departments-list li{
 			</div><!-- modal-content -->
 		</div><!-- modal-dialog -->
 	</div><!-- modal -->
-	
+
 {% endblock %}
-
-

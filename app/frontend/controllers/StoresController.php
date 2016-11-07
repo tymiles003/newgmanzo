@@ -24,6 +24,11 @@ class StoresController extends BaseController{
     public function initialize() {
         parent::initialize();
         \Phalcon\Tag::appendTitle('Stores');
+        //Check if the url param has vendor;
+        if($this->request->hasQuery('vendor')){
+            $vendor = $this->request->getQuery('vendor');
+            $this->session->set('vendor_id', $vendor);
+        }
         $this->view->setVar('category', Category::find()->toArray());
         $this->view->setVar('helper', $this->component->helper);
     }
@@ -40,30 +45,51 @@ class StoresController extends BaseController{
         return;
     }
     
-    public function beforeExecuteRoute(Dispatcher $dispatcher){
+    public function categoryAction(){
+        $params             = $this->request->getQuery();
+        $vendor_id          = $this->session->get('vendor_id');
+        $this->view->pager  = Products::__getCatProBuilder($params, 
+                array('vendor_id' => $this->request->getQuery('vendor')));
+        $this->view->vendors = Vendor::findFirstByVendor_id($vendor_id);
+        $this->view->cat    = Category::findFirstByCategory_id($params['cat']);
+        $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_ACTION_VIEW);
+        return;
+    }
+    
+    public function beforeExecuteRoute(\Phalcon\Dispatcher $dispatcher){
         $action     = $dispatcher->getActionName();
         $controller = $dispatcher->getControllerName();
+        if(!$this->session->has('strLocation')){
+            $this->dispatcher->forward(array(
+                'controller'    => 'stores',
+                'action'        => 'getStores'
+            ));
+        }
     }
     
     public function afterExecuteRoute(Dispatcher $dispatcher){
         
     }
     
+    public function getStoresAction(){
+        $this->view->setVar('stores', Vendor::find()->toArray());
+        $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_ACTION_VIEW);
+        return;
+    }
+    
     public function detailsAction($id=""){
-        if(empty($id) && !is_null($id)){
-            $this->response->redirect('stores/?strLocation='.$this->session->get('strLocation'));
-            $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_NO_RENDER);
-            return;
-        }
-        $this->view->setVars(array(
-            'store'     => $this->request->getQuery('display'),
-            'details'   => Products::find('product_id='.$id)->getLast()));
         $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_ACTION_VIEW);
         return;
     }
 
     public function browseAction(){
-        
+        $this->view->setVar('others', array(
+            'vendor_id' => $this->request->getQuery('vendor')));
+        $this->view->setVar('category', Category::find()->toArray());
+        $this->view->setVar('vendors', Vendor::findFirstByVendor_id(
+                                    $this->request->getQuery('vendor')));
+        $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_ACTION_VIEW);
+        return;
     }
     
     public function packageAction(){
