@@ -60,10 +60,7 @@ class StoresController extends BaseController{
         $action     = $dispatcher->getActionName();
         $controller = $dispatcher->getControllerName();
         if(!$this->session->has('strLocation')){
-            $this->dispatcher->forward(array(
-                'controller'    => 'stores',
-                'action'        => 'getStores'
-            ));
+            $this->response->redirect('stores/getStores');
         }
     }
     
