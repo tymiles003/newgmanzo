@@ -14,7 +14,6 @@
 	<p class="">Hello, Welcome!.</p>
 	<div class="social-sign-in outer-top-xs">
 		<a href="#" class="facebook-sign-in"><i class="fa fa-facebook"></i> Sign In with Facebook</a>
-		<a href="#" class="twitter-sign-in"><i class="fa fa-twitter"></i> Sign In with Twitter</a>
 	</div>
 	<form class="register-form outer-top-xs" role="form" method="post" action="{{url('login/')}}">
 		<div class="form-group">
@@ -72,26 +71,7 @@
 <!-- create a new account -->			</div><!-- /.row -->
 		</div><!-- /.sigin-in-->
 
-		<!-- ============================================== BRANDS CAROUSEL ============================================== -->
-<div id="brands-carousel" class="logo-slider wow fadeInUp">
-
-		<h3 class="section-title">SHOPS | VENDORS</h3>
-		<div class="logo-slider-inner">	
-			<div id="brand-slider" class="owl-carousel brand-slider custom-carousel owl-theme">
-				
-                            {% for keys, values in vendors %}
-				<div class="item">
-					<a href="{{url('stores/browse?task='~values['vendor_id']~'&goto=1&display='~values['display_name'])}}" class="image">
-						<img data-echo="{{url('assets/images/vendor/'~values['vendor_logo'])}}" src="{{url('assets/images/blank.gif')}}" alt="">
-					</a>	
-				</div><!--/.item-->
-                            {% endfor %}
-				
-		    </div><!-- /.owl-carousel #logo-slider -->
-		</div><!-- /.logo-slider-inner -->
-	
-</div><!-- /.logo-slider -->
-<!-- ============================================== BRANDS CAROUSEL : END ============================================== -->	</div><!-- /.container -->
+    </div><!-- /.container -->
 </div>
 {% endblock %}
 

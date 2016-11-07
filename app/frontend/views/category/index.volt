@@ -45,7 +45,7 @@
                   <button type="button" id="list-view" class="btn btn-default" data-toggle="tooltip" title="List"><i class="fa fa-th-list"></i></button>
                   <button type="button" id="grid-view" class="btn btn-default" data-toggle="tooltip" title="Grid"><i class="fa fa-th"></i></button>
                 </div>
-                <a href="compare.html" id="compare-total">Product Compare (0)</a> </div>
+                <a href="javascript:void(0);" id="compare-total">Product (0)</a> </div>
               
               <div class="col-sm-5 text-right">
                 <label class="control-label" for="input-limit">Show:</label>

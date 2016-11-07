@@ -40,7 +40,7 @@
 </style>
 <div class="body-content outer-top-xs" id="top-banner-and-menu">
 	<div class="container">
-            {% include "partials/catforstore.volt" %}
+            
             <div id="grid-container">
 								<div class="contact-page">
 									<div class="row">

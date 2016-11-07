@@ -15,7 +15,7 @@
                             <div class="product">		
                                 <div class="product-image">
                                         <div class="image">
-                                                <a href="{{url('stores/browse/?task='~values['vendor_id'])}}"><img  src="{{url('assets/image/vendor/'~values['vendor_logo'])}}" alt=""></a>
+                                                <a href="{{url('stores/browse?vendor='~values['vendor_id'])~'&task=browse'}}"><img  src="{{url('assets/image/vendor/'~values['vendor_logo'])}}" alt=""></a>
                                         </div><!-- /.image -->			                      		   
                                 </div><!-- /.product-image -->
 

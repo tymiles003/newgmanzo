@@ -42,38 +42,21 @@ class ProductController extends BaseController{
             if(empty($_SESSION['cart_item'])){
                 exit('Empty Shopping Basket');
             }
+            $stringBuilt        = '<table class="table">
+                                <tbody>';
             foreach($this->session->get('cart_item') as $key => $value){
                 $subTotal[]     = $value['qty'] * $value['price'];
-                $stringBuilt    .= '<div class="cart-item product-summary"><div class="row">
-                                <div class="col-xs-4">
-                                        <div class="image">
-                                                <a href="detail.html"><img src="'.$value['image'].'" class="img-responsive" alt=""></a>
-                                        </div>
-                                </div>
-                                <div class="col-xs-7">
-
-                                        <h3 class="name"><a href="index.php?page-detail">'.ucwords($value['name']).'</a></h3>
-                                        <div class="price">₦'.number_format($value['price'] * $value['qty'], 2).'</div>
-                                        <div class="qty"><small>('.$value['qty'].' x '.$value['price'].')</small></div>
-                                </div>
-                                <div class="col-xs-1 action">
-                                        <a href="#" id="remove_qty" title="'.$value['id'].'"><i class="fa fa-times"></i></a>
-                                </div>
-                        </div></div><!-- /.cart-item -->
-                <div class="clearfix"></div>';
+                $stringBuilt    .= '<tr><td class="text-center">
+                                                <a href="#"><img src="'.$value['image'].'" class="img-responsive" style="width:20%;" alt=""></a>
+                                        </td>
+                                        <td class="text-left"><a href="#">'.ucwords($value['name']).'</a></td>
+                                        <td class="text-right">x '.$value['qty'].'</td>
+                                        <td class="text-right">$'.number_format($value['price'] * $value['qty'], 2).'</td>
+                                        <td class="text-center"><button class="btn btn-danger btn-xs remove" id="remove_qty" title="'.$value['id'].'" type="button"><i class="fa fa-times"></i></button></td>
+                                </tr>'
+                                ;
             }
-            $stringBuilt    .= '<hr>
-                    <div class="clearfix cart-total">
-                            <div class="pull-right">
-
-                                            <span class="text">Total :</span><span class="price">₦'.number_format(array_sum($subTotal), 2).'</span>
-
-                            </div>
-                            <div class="clearfix"></div>
-
-                            <a href="http://localhost/gmanzomulti/checkout" class="btn btn-upper btn-primary m-t-20"><strong>View Cart</strong></a>	
-                            <button type="button" id="empty" class="btn btn-upper btn-danger m-t-20"><strong>Empty</strong> <i class="fa fa-trash"></i> </button>	
-                    </div><!-- /.cart-total-->';
+            $stringBuilt    .= '</tbody></table><p class="checkout"><a href="http://localhost/newgmanzo/checkout/" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> View Cart</a>&nbsp;&nbsp;&nbsp;<a href="http://localhost/newgmanzo/order/" class="btn btn-primary"><i class="fa fa-share"></i> Checkout</a></p>';
             echo !empty($stringBuilt) ? $stringBuilt : 'Empty Shopping Basket(s)';
             $this->view->disable();
             exit;
@@ -170,10 +153,17 @@ class ProductController extends BaseController{
         
     }
     
+    public function grandTotalAction(){
+        echo number_format($this->__getSubTotal(), 2);
+        exit();
+    }
+    
     public function __getSubTotal(){
         $total  = array();
-        foreach($this->session->get('cart_item') as $keys=>$values){
-            $total[]    =           $values['qty'] * $values['price'];
+        if($this->session->has('cart_item')){
+            foreach($this->session->get('cart_item') as $keys=>$values){
+                $total[]    =           $values['qty'] * $values['price'];
+            }
         }
         return array_sum($total);
     }

@@ -120,6 +120,7 @@
             var tracker = $(this).attr('id');
             cartStackFlow().setCartFlowId(tracker);
             cartStackFlow().getCartFlowId();
+            cartStackFlow().getTotalAmount();
         });
         
         $('#basketMouth').on('click', function(evt){
@@ -131,15 +132,18 @@
             evt.preventDefault();
             cartStackFlow().removeItemFlow($(this).attr('title'));
             cartStackFlow().getCartFlowId();
+            cartStackFlow().getTotalAmount();
         })
         
         $(document).on('click','#empty', function(evt){
             evt.preventDefault();
             cartStackFlow().clearCartFlow();
             cartStackFlow().getCartFlowId();
+            cartStackFlow().getTotalAmount();
         })
         
         cartStackFlow().getCartFlowId();
+        cartStackFlow().getTotalAmount();
         
         $('ul#state-packages > li').on('click', function(evt){
             evt.preventDefault();
@@ -182,8 +186,17 @@
                         item_price: tagPrice,
                         action: 'add'
                     },
+                    beforeSend: function(){
+                        $('button#'+id).text('Wait! Adding Item');
+                    },
                     success: function(response){
                         $('#total_items').html(response);                        
+                    },
+                    complete: function(xhr, status){
+                        //window.alert(JSON.stringify(status));
+                        if(xhr.readyState == 4 && xhr.status == 200 && xhr.statusText == 'OK'){
+                            $('button#'+id).text('Add To Cart');
+                        }
                     }
                 });
             },
@@ -199,12 +212,27 @@
                     }
                 });
             },
+            getTotalAmount: function(){
+                $.ajax({
+                    type:   'POST',
+                    url:    'http://localhost/newgmanzo/product/grandTotal',
+                    data:   {
+                        total_cart_items: true, 
+                    },
+                    success: function(response){
+                        $('.value').html(response);
+                    }
+                });
+            },
             showCartFlow : function(){
                 $.ajax({
                     type:   'POST',
                     url:    'http://localhost/newgmanzo/product/showCart',
                     data:   {
                         showcart: true
+                    },
+                    beforeSend: function(){
+                        $('#mycart').html('Please Wait...');
                     },
                     success:function(response){
                         $('#mycart').html(response);
@@ -239,33 +267,33 @@
         }
     }
     
-    $.get('http://localhost/newgmanzo/order/getAgents', function(data, textStatus){
-        var jsonString  = $.parseJSON(JSON.stringify(data));
-        if(jsonString.status == true){
-            var fleetFlow   = [];
-            var textsFlow   = '';
-            for(var n in jsonString.data){
-                if(jsonString.data[n].hasOwnProperty("fleets")){
-                    for(var i = 0; i < jsonString.data[n].fleets.length; i++){
-                        var fleetStack  = jsonString.data[n].fleets[i];
-                        fleetFlow.push(jsonString.data[n].fleets[i].fleet_name);
-                        textsFlow   += '<div class="clearfix address">';
-                        if(fleetStack.is_available == 1){
-                            textsFlow   += '<span class="contact-i"><i class="fa fa-bicycle"></i></span>';
-                            textsFlow   += '<span class="contact-span">'+jsonString.data[n].fleets[i].
-                            fleet_name.toUpperCase()+'  <span class="badge pull-right"><small>ON</small></span></div>';
-                        }
-                        else{
-                            textsFlow   += '<span class="contact-i"><i class="fa fa-bell-slash"></i></span>';
-                            textsFlow   += '<span class="contact-span">'+jsonString.data[n].fleets[i].
-                            fleet_name.toUpperCase()+'  <span class="badge pull-right"><small>OFF</small></span></div>';
-                        }
-                        //textsFlow   += '<span class="contact-i"><i class="fa fa-map-marker"></i></span>';
-                    }
-                }
-            }
-            $('#list_agents').html(textsFlow);
-        }
-    })
+//    $.get('http://localhost/newgmanzo/order/getAgents', function(data, textStatus){
+//        var jsonString  = $.parseJSON(JSON.stringify(data));
+//        if(jsonString.status == true){
+//            var fleetFlow   = [];
+//            var textsFlow   = '';
+//            for(var n in jsonString.data){
+//                if(jsonString.data[n].hasOwnProperty("fleets")){
+//                    for(var i = 0; i < jsonString.data[n].fleets.length; i++){
+//                        var fleetStack  = jsonString.data[n].fleets[i];
+//                        fleetFlow.push(jsonString.data[n].fleets[i].fleet_name);
+//                        textsFlow   += '<div class="clearfix address">';
+//                        if(fleetStack.is_available == 1){
+//                            textsFlow   += '<span class="contact-i"><i class="fa fa-bicycle"></i></span>';
+//                            textsFlow   += '<span class="contact-span">'+jsonString.data[n].fleets[i].
+//                            fleet_name.toUpperCase()+'  <span class="badge pull-right"><small>ON</small></span></div>';
+//                        }
+//                        else{
+//                            textsFlow   += '<span class="contact-i"><i class="fa fa-bell-slash"></i></span>';
+//                            textsFlow   += '<span class="contact-span">'+jsonString.data[n].fleets[i].
+//                            fleet_name.toUpperCase()+'  <span class="badge pull-right"><small>OFF</small></span></div>';
+//                        }
+//                        //textsFlow   += '<span class="contact-i"><i class="fa fa-map-marker"></i></span>';
+//                    }
+//                }
+//            }
+//            $('#list_agents').html(textsFlow);
+//        }
+//    })
 
 })(jQuery);
