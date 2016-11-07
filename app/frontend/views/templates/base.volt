@@ -13,7 +13,7 @@
 
 	    <title>GMANZO</title>
             {{ this.assets.outputCss('headers') }}
-            <link href="https://fonts.googleapis.com/css?family=Droid+Sans|Open+Sans" rel="stylesheet"> 
+            <link href="https://fonts.googleapis.com/css?family=Droid+Sans|Open+Sans" rel="stylesheet" /> 
             {% block head %} {% endblock %}
 	    
 		

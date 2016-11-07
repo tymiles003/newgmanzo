@@ -59,7 +59,7 @@ class StoresController extends BaseController{
     public function beforeExecuteRoute(\Phalcon\Dispatcher $dispatcher){
         $action     = $dispatcher->getActionName();
         $controller = $dispatcher->getControllerName();
-        if(!$this->session->has('strLocation')){
+        if(!$this->session->has('strLocation') && $action != 'getStores'){
             $this->response->redirect('stores/getStores');
         }
     }

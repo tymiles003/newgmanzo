@@ -188,7 +188,7 @@ ul.departments-list li{
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <img src="{{url('assets/images/logo.png')}}" alt="">
+        <img src="{{url('assets/image/logo.png')}}" alt="">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title"><strong>&nbsp;</strong></h4>
       </div>
