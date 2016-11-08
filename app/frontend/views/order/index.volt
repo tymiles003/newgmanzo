@@ -104,7 +104,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                         <label class="info-title" for="exampleInputEmail2">State <span>*</span></label>
-                        <input type="text" name="state" value="<?php echo $_SESSION['strLocation']; ?>" required class="form-control unicase-form-control text-input" id="exampleInputEmail2" >
+                        <input type="text" name="state" value="<?php echo @$_SESSION['strLocation']; ?>" required class="form-control unicase-form-control text-input" id="exampleInputEmail2" >
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -155,8 +155,8 @@
         </tr>
         </table>
         <p>I've read and accepted the <strong>terms & conditions</strong></p>
-	<button type="submit" class="btn-upper btn-lg btn btn-primary checkout-page-button" id="place-order" style="background:#ff0405;">PLACE ORDER NOW</button>
-	<a href="{{url('checkout/?clear=true')}}" class="btn-upper btn-lg btn btn-primary checkout-page-button" id="place-order" style="background:#f90;">CLEAR ORDER</a>
+	<button type="submit" class="btn-upper btn-lg btn btn-default checkout-page-button" id="place-order"><small>PLACE ORDER NOW</small></button>
+	<a href="{{url('checkout/?clear=true')}}" class="btn-upper btn-lg btn btn-primary checkout-page-button" id="place-order"><small>CLEAR ORDER</small></a>
         {% else %}<hr/>
         <strong>EMPTY CART(0)</strong>
         {% endif %}
@@ -165,7 +165,7 @@
 </div>
 <div class="col-md-4 contact-info contact-form">
 	<div class="contact-title">
-		<h4>AGENTS AVAILABLE</h4>
+		<!--<h4>AGENTS AVAILABLE</h4>-->
 	</div>
         <div id="list_agents"></div>
 	

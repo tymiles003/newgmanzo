@@ -38,7 +38,7 @@
     margin-top:10px !important;
 }
 
-#myModalState {
+#myModalState, #pickUpModal {
    /**background: #3498db !important;**/
    background: #fafafa !important;
    /**opacity: .80;
@@ -158,8 +158,13 @@
           </div>
           <div id="top-links" class="nav pull-right flip">
             <ul>
-              <li><a href="login.html">Login</a></li>
-              <li><a href="register.html">Register</a></li>
+              <li>
+                <?php if($this->session->has('auth')){ ?>
+                <a href="{{url('login/logout')}}">Sign Out</a></li>
+                <?php }else{ ?>
+                <a href="{{url('checkout/process')}}">Sign In</a></li>
+                <?php } ?>
+              <li><a href="{{url('checkout/process')}}">Register</a></li>
             </ul>
           </div>
         </div>
@@ -220,9 +225,14 @@
             </li>
             <li class="custom-link"><a href="{{url('checkout')}}">Cart</a></li>
             
-            <li class="dropdown information-link"><a href="{{url('checkout/process')}}">Login</a>
-            </li>
-            <li class="custom-link-right"><a href="#" target="_blank"><strong>Pick Ups &amp; Delivery</strong></a></li>
+            <li>
+                <?php if($this->session->has('auth')){ ?>
+                <a href="{{url('login/logout')}}">Sign Out</a>
+                <?php }else{ ?>
+                <a href="{{url('checkout/process')}}">Sign In</a>
+                <?php } ?>
+              </li>
+            <li class="custom-link-right"><a href="#" id="pickUps"><strong>Pick Ups &amp; Delivery</strong></a></li>
           </ul>
         </div>
       </div>
@@ -317,6 +327,86 @@
 <!-- ============================================================= FOOTER : END============================================================= -->
 
 
+<!-- MODAL -->
+<div id="pickUpModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <img src="{{url('assets/image/logo.png')}}" alt="">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><strong>&nbsp;</strong></h4>
+      </div>
+      <div class="modal-body" style="background:none !important;">
+        <p>
+        {% if session.has('auth') %}
+        <h4>Pick Up &amp; Delivery Task</h4>
+        <form class="register-form outer-top-xs" id="pickUpDeliver" role="form" action="{{url('task/')}}" method="post">
+		<div class="form-group">
+                    <label class="info-title" for="pickup_fullname">Pick Up Customer's Full Name <span>*</span></label>
+                    <input type="text" name="pickup_fullname" placeholder="Pick Up Customer's Full Name" class="form-control unicase-form-control text-input" id="pickup_fullname" >
+	  	</div>
+		<div class="form-group">
+                    <label class="info-title" for="pickup_phone">Pick Up Customer's Phone Number <span>*</span></label>
+                    <input type="number" name="pickup_phone" placeholder="Pick Up Customer's Phone Number" class="form-control unicase-form-control text-input" id="pickup_phone" >
+	  	</div>
+		<div class="form-group">
+                    <label class="info-title" for="pickup_address">Pick Up Address <span>*</span></label>
+                    <input type="text" name="pickup_address" placeholder="Pick Up Address or Location" class="form-control unicase-form-control text-input" id="pickup_address" >
+	  	</div>
+		<div class="form-group">
+                    <label class="info-title" for="state">State of Task <span>*</span></label>
+                    <input type="text" name="state" placeholder="Type the state for the task" class="form-control unicase-form-control text-input" id="state" >
+	  	</div>
+		<div class="form-group">
+                    <label class="info-title" for="pickup_description">Pick Up Job Description <span>*</span></label>
+                    <textarea name="pickup_description" placeholder="Type the Job Description for the Pick Up Task" class="form-control unicase-form-control text-input" id="pickup_description"></textarea>
+	  	</div>
+                <h4>Delivery Task</h4>
+                <div class="form-group">
+	    	<label class="info-title" for="exampleInputEmail2">Delivery Customer Full Name <span>*</span></label>
+	    	<input type="text" name="delivery_fullname" placeholder="Delivery Customer Full Name" class="form-control unicase-form-control text-input" id="exampleInputEmail2" >
+	  	</div>
+		<div class="form-group">
+	    	<label class="info-title" for="exampleInputEmail2">Delivery Customer's Phone Number <span>*</span></label>
+	    	<input type="number" name="delivery_phone" placeholder="Delivery Customer's Phone Number" class="form-control unicase-form-control text-input" id="exampleInputEmail2" >
+	  	</div>
+		<div class="form-group">
+	    	<label class="info-title" for="exampleInputEmail2">Delivery Address <span>*</span></label>
+	    	<input type="text" name="delivery_address" placeholder="Delivery Address" class="form-control unicase-form-control text-input" id="exampleInputEmail2" >
+	  	</div>
+		<div class="form-group">
+	    	<label class="info-title" for="exampleInputEmail2">Delivery Message <span>*</span></label>
+	    	<textarea name="delivery_message" placeholder="Delivery Message" class="form-control unicase-form-control text-input" id="exampleInputEmail2"></textarea>
+	  	</div>
+	  	<button type="button" class="btn-upper btn btn-primary checkout-page-button" id="createTask">Create Task</button>
+	</form>
+        {% else %}
+            <form class="register-form outer-top-xs" role="form" method="post" action="{{url('login/')}}">
+		<div class="form-group">
+		    <label class="info-title" for="email">Email Address <span>*</span></label>
+		    <input type="email" name="email" class="form-control unicase-form-control text-input" id="email" >
+		</div>
+	  	<div class="form-group">
+		    <label class="info-title" for="password">Password <span>*</span></label>
+		    <input type="password" name="password" class="form-control unicase-form-control text-input" id="password" >
+		</div>
+		<div class="radio outer-xs">
+		  	<button type="button" id="loginToProceed" class="btn-upper btn-lg btn btn-primary checkout-page-button">Login to Proceed</button>
+		  	<a href="#" class="forgot-password pull-right">Forgot your Password?</a>
+		</div>
+	  	
+            </form>
+        {% endif %}
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="lnk btn" data-dismiss="modal" style="background:none;">Close Window</button>
+        <!--<button type="button" class="lnk btn btn-lg" style="background:white; border:1px solid #444; color:#444;"><strong>Display Shops</strong></button>-->
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 
 {{ this.assets.outputJs('footers') }}
 <script type="text/javascript">
@@ -370,6 +460,11 @@
                 });
             })
         });
+        
+        $('a#pickUps').click(function(e){
+            e.preventDefault();
+            $('#pickUpModal').modal('show');
+        })
     })
 </script>
 </body>

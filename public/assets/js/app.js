@@ -8,7 +8,40 @@
     
     var jsonBody    = {};
     $(document).ready(function(){
-    
+        //starting the pick up and delivery task
+        $(document).on('click','button#createTask', function(e){
+            e.preventDefault();
+            var formSerialize   = $('#pickUpDeliver').serialize();
+            $.ajax({
+                type:   'POST',
+                url:    'http://localhost/newgmanzo/task',
+                data:   formSerialize,
+                beforeSend: function(){
+                    $('#pickUpDeliver').find('input, textarea').each(function(k,v){
+                        if(!$.trim($(v).val())){
+                            var taskField   = $.trim($(v).attr('name')).split('_');
+                            window.alert(ucwords(taskField[0]+' '+taskField[1])+' is empty');
+                            return false;
+                        }
+                        $('#pickUpDeliver').text('Please Wait! Task Processing...');
+                    })
+                },
+                success:    function(response,status,xhr){
+                    if(response.status == 200 && xhr.readyState == 4){
+                        bootbox.alert('<h4>Task Performed! '+response.message+'</h4>', function(){
+                            $('#pickUpModal').modal('hide');
+                        });
+                    }
+                },
+                complete:   function(xhr,status){
+                    //$('#pickUpModal').modal('hide');
+                }
+            });
+        });
+        
+        $('#pickUpModal').on('hidden.bs.modal', function(){
+            window.location.reload();
+        });
 //        $('#pick_date').datetimepicker({
 //            format:'m/d/Y H:i:s',
 //        });
@@ -297,3 +330,15 @@
 //    })
 
 })(jQuery);
+
+//Functions
+/**
+ * @param {type} str
+ * @returns {String}
+ */
+function ucwords(str) {
+ return (str + '')
+    .replace(/^([a-z\u00E0-\u00FC])|\s+([a-z\u00E0-\u00FC])/g, function($1) {
+      return $1.toUpperCase();
+    });
+}
