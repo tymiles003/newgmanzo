@@ -61,7 +61,7 @@ class OrderController extends BaseController{
                     $default        = date('Y-m-d');
                     $this->__buildRequest(array(
                         'trans_id'  => $track_id,
-                        'vendor_id' => $this->session->get('v_id')));
+                        'vendor_id' => $this->session->get('vendor_id')));
                     
                     //Setup the order insert which is the post field
                     if($order->save($this->request->getPost()) == FALSE){
@@ -83,7 +83,7 @@ class OrderController extends BaseController{
                         'status'        => 'pending',
                         'agent'         => '',
                         'delivery_time' => date('Y-m-d H:i:s', $hourLater),
-                        'vendor_id'     => $this->session->get('v_id')
+                        'vendor_id'     => $this->session->get('vendor_id')
                     );
                     
                     if($sales->save($startSales) == FALSE){
@@ -105,14 +105,98 @@ class OrderController extends BaseController{
             }
         }
         if($tracker){
-            $response->setJsonContent(array(
-                'status'    => $tracker,
-                'data'      => $this->request->getPost()
-            ));
+            $taskRespo  = json_decode($this->createTask());
+            if($taskRespo->status == self::ACTION_COMPLETE){
+                $response->setJsonContent(array(
+                    'status'    => $tracker,
+                    'tookan'    => $taskRespo,
+                    'data'      => $this->request->getPost()
+                ));
+            }
+            else{
+                $response->setJsonContent(array(
+                    'status' => false,'tookan' => $taskRespo
+                ));
+            }
         }
         $response->setHeader('Content-Type', 'application/json');
         $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_NO_RENDER);
-        $response->send();
+        $response->send(); exit();
+    }
+    
+    /**
+     * This can be placed into factory settings
+     * CreateTask using this of the API fixtures
+     * @return type
+     */
+    public function createTask($json_decode = false){
+        $typeRespo  = new \Phalcon\Http\Response();
+        parse_str($this->request->getPost('data'), $customer);
+        $getTeam    = json_decode($this->__getAvailableFleets());
+        
+        $hourLater  = strtotime($customer['delivery_time']) + 60 * 60; 
+        
+        foreach($getTeam->data as $keys => $values){
+            if(strtolower($values->team_name) == $_SESSION['strLocation']){
+                $vendor     = \Multiple\Frontend\Models\Vendor::find(
+                        'vendor_id='.$this->session->get('vendor_id'))->getLast(); 
+                $jsonString = "{
+                        \"access_token\": \"".self::ACESS_TOKEN."\",
+                        \"order_id\": \"".$customer['trans_id']."\",
+                        \"team_id\": \"".$values->team_id."\",
+                        \"auto_assignment\": \"0\",
+                        \"job_description\": \"Groceries Pick Up\",
+                        \"job_pickup_phone\": \"".$vendor->phone."\",
+                        \"job_pickup_name\": \"".$vendor->display_name."\",
+                        \"job_pickup_email\": \"\",
+                        \"job_pickup_address\": \"".$vendor->address2."\",
+                        \"job_pickup_latitude\": \"\",
+                        \"job_pickup_longitude\": \"\",
+                        \"job_pickup_datetime\": \"".date('m/d/Y H:i:s')."\",
+                        \"customer_email\": \"".$customer['email']."\",
+                        \"customer_username\": \"".$customer['lastname']." ".$customer['firstname']."\",
+                        \"customer_phone\": \"".$customer['phonenumber']."\",
+                        \"customer_address\": \"".$customer['address']."\",
+                        \"latitude\": \"\",
+                        \"longitude\": \"\",
+                        \"job_delivery_datetime\": \"".date('m/d/Y H:i:s', $hourLater)." \",
+                        \"has_pickup\": \"1\",
+                        \"has_delivery\": \"1\",
+                        \"layout_type\": \"0\",
+                        \"tracking_link\": 1,
+                        \"timezone\": \"+1\",
+                        \"custom_field_template\": \"\",
+                        \"meta_data\": [
+                          {
+                            \"label\": \"\",
+                            \"data\": \"\"
+                          }
+                        ],
+                        \"pickup_custom_field_template\": \"\",
+                        \"pickup_meta_data\": [
+                          {
+                            \"label\": \"\",
+                            \"data\": \"\"
+                          }
+                        ],
+                        \"fleet_id\": \"\",
+                        \"p_ref_images\": [
+                          \"http://tookanapp.com/wp-content/uploads/2015/11/logo_dark.png\",
+                          \"http://tookanapp.com/wp-content/uploads/2015/11/logo_dark.png\"
+                        ],
+                        \"ref_images\": [
+                          \"http://tookanapp.com/wp-content/uploads/2015/11/logo_dark.png\",
+                          \"http://tookanapp.com/wp-content/uploads/2015/11/logo_dark.png\"
+                        ],
+                        \"notify\": 1,
+                        \"tags\": \"\",
+                        \"geofence\": 0
+                    }";
+                $curlRespo  = $this->__curlRequestTask(
+                        "https://api.tookanapp.com/create_task", $jsonString);
+                return $json_decode ? json_decode($curlRespo) : $curlRespo;
+            }
+        }
     }
     
     public function fixAssignTeamAction(){
