@@ -97,65 +97,12 @@
             <div class="links">
               <ul>
                 <li class="mobile"><i class="fa fa-phone"></i>+91 9898777656</li>
-                <li class="email"><a href="mailto:info@marketshop.com"><i class="fa fa-envelope"></i>info@marketshop.com</a></li>
-                <li class="wrap_custom_block hidden-sm hidden-xs"><a>Custom Block<b></b></a>
-                  <div class="dropdown-menu custom_block">
-                    <ul>
-                      <li>
-                        <table>
-                          <tbody>
-                            <tr>
-                              <td><img alt="" src="image/banner/cms-block.jpg"></td>
-                              <td><img alt="" src="image/banner/responsive.jpg"></td>
-                            </tr>
-                            <tr>
-                              <td><h4>CMS Blocks</h4></td>
-                              <td><h4>Responsive Template</h4></td>
-                            </tr>
-                            <tr>
-                              <td>This is a CMS block. You can insert any content (HTML, Text, Images) Here.</td>
-                              <td>This is a CMS block. You can insert any content (HTML, Text, Images) Here.</td>
-                            </tr>
-                            <tr>
-                              <td><strong><a class="btn btn-default btn-sm" href="#">Read More</a></strong></td>
-                              <td><strong><a class="btn btn-default btn-sm" href="#">Read More</a></strong></td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
+                <li class="email"><a href="mailto:sales@gmanzo.com"><i class="fa fa-envelope"></i>sales@gmanzo.com</a></li>
                 <li><a href="#">Wish List (0)</a></li>
-                <li><a href="checkout.html">Checkout</a></li>
+                <li><a href="{{url('checkout/')}}">Checkout</a></li>
               </ul>
             </div>
-            <div id="language" class="btn-group">
-              <button class="btn-link dropdown-toggle" data-toggle="dropdown"> <span> <img src="image/flags/gb.png" alt="English" title="English">English <i class="fa fa-caret-down"></i></span></button>
-              <ul class="dropdown-menu">
-                <li>
-                  <button class="btn btn-link btn-block language-select" type="button" name="GB"><img src="image/flags/gb.png" alt="English" title="English" /> English</button>
-                </li>
-                <li>
-                  <button class="btn btn-link btn-block language-select" type="button" name="GB"><img src="image/flags/ar.png" alt="Arabic" title="Arabic" /> Arabic</button>
-                </li>
-              </ul>
-            </div>
-            <div id="currency" class="btn-group">
-              <button class="btn-link dropdown-toggle" data-toggle="dropdown"> <span> $ USD <i class="fa fa-caret-down"></i></span></button>
-              <ul class="dropdown-menu">
-                <li>
-                  <button class="currency-select btn btn-link btn-block" type="button" name="EUR">€ Euro</button>
-                </li>
-                <li>
-                  <button class="currency-select btn btn-link btn-block" type="button" name="GBP">£ Pound Sterling</button>
-                </li>
-                <li>
-                  <button class="currency-select btn btn-link btn-block" type="button" name="USD">$ US Dollar</button>
-                </li>
-              </ul>
-            </div>
-          </div>
+            
           <div id="top-links" class="nav pull-right flip">
             <ul>
               <li>
@@ -263,33 +210,32 @@
             <ul>
               <li class="address"><i class="fa fa-map-marker"></i>Central Square, 22 Hoi Wing Road, New Delhi, India</li>
               <li class="mobile"><i class="fa fa-phone"></i>+91 9898777656</li>
-              <li class="email"><i class="fa fa-envelope"></i>Send email via our <a href="contact-us.html">Contact Us</a>
+              <li class="email"><i class="fa fa-envelope"></i>Send email via our <a href="mailto:sales@gmanzo.com">Contact Us</a>
             </ul>
           </div>
           <div class="column col-lg-2 col-md-2 col-sm-3 col-xs-12">
             <h5>Information</h5>
             <ul>
-              <li><a href="about-us.html">About Us</a></li>
-              <li><a href="about-us.html">Delivery Information</a></li>
-              <li><a href="about-us.html">Privacy Policy</a></li>
-              <li><a href="about-us.html">Terms &amp; Conditions</a></li>
+              <li><a href="{{url('aboutus/deliveryInfo')}}">Delivery Information</a></li>
+              <li><a href="{{url('aboutus/privacyPolicy')}}">Privacy Policy</a></li>
+              <li><a href="{{url('aboutus/termsCon')}}">Terms &amp; Conditions</a></li>
             </ul>
           </div>
           <div class="column col-lg-2 col-md-2 col-sm-3 col-xs-12">
             <h5>Customer Service</h5>
             <ul>
-              <li><a href="contact-us.html">Contact Us</a></li>
-              <li><a href="#">Returns</a></li>
-              <li><a href="sitemap.html">Site Map</a></li>
+              <li><a href="">Dispatchers</a></li>
+              <li><a href="#">Shopping Cart</a></li>
+              <li><a href="#">Sign In</a></li>
             </ul>
           </div>
           <div class="column col-lg-2 col-md-2 col-sm-3 col-xs-12">
             <h5>Extras</h5>
             <ul>
-              <li><a href="#">Brands</a></li>
-              <li><a href="#">Gift Vouchers</a></li>
-              <li><a href="#">Affiliates</a></li>
-              <li><a href="#">Specials</a></li>
+              <li><a href="#">Shops | Stores</a></li>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Contact</a></li>
+              
             </ul>
           </div>
           <div class="column col-lg-2 col-md-2 col-sm-3 col-xs-12">
@@ -298,7 +244,7 @@
               <li><a href="#">My Account</a></li>
               <li><a href="#">Order History</a></li>
               <li><a href="#">Wish List</a></li>
-              <li><a href="#">Newsletter</a></li>
+              
             </ul>
           </div>
         </div>
@@ -314,7 +260,7 @@
         </div>
         <div class="bottom-row">
           <div class="custom-text text-center"> <img alt="" src="{{url('assets/image/logo-small.png')}}">
-            <p>This is a CMS block. You can insert any content (HTML, Text, Images) Here. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+            <p>GMANZO! Making your favorites accessible and available in time.</p>
           </div>
           <div class="payments_types"> <a href="#" target="_blank"> <img data-toggle="tooltip" src="{{url('assets/image/payment/payment_paypal.png')}}" alt="paypal" title="PayPal"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="{{url('assets/image/payment/payment_american.png')}}" alt="american-express" title="American Express"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="{{url('assets/image/payment/payment_2checkout.png')}}" alt="2checkout" title="2checkout"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="{{url('assets/image/payment/payment_maestro.png')}}" alt="maestro" title="Maestro"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="{{url('assets/image/payment/payment_discover.png')}}" alt="discover" title="Discover"></a> <a href="#" target="_blank"> <img data-toggle="tooltip" src="{{url('assets/image/payment/payment_mastercard.png')}}" alt="mastercard" title="MasterCard"></a> </div>
         </div>
@@ -384,11 +330,11 @@
             <form class="register-form outer-top-xs" role="form" method="post" action="{{url('login/')}}">
 		<div class="form-group">
 		    <label class="info-title" for="email">Email Address <span>*</span></label>
-		    <input type="email" name="email" class="form-control unicase-form-control text-input" id="email" >
+		    <input type="email" placeholder="Enter your email address" name="email" class="form-control unicase-form-control text-input" id="email" >
 		</div>
 	  	<div class="form-group">
 		    <label class="info-title" for="password">Password <span>*</span></label>
-		    <input type="password" name="password" class="form-control unicase-form-control text-input" id="password" >
+		    <input type="password" placeholder="Enter your email address" name="password" class="form-control unicase-form-control text-input" id="password" >
 		</div>
 		<div class="radio outer-xs">
 		  	<button type="button" id="loginToProceed" class="btn-upper btn-lg btn btn-primary checkout-page-button">Login to Proceed</button>

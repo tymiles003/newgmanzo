@@ -26,7 +26,7 @@ class TaskController extends BaseController{
             $query  = $this->request->getPost();
             $typeRespo  = new \Phalcon\Http\Response();
             $team_id    = $this->__getFleetTeam($query['state']);
-            //$hourLater  = strtotime($query['delivery_time']) + 60 * 60;
+            $hourLater  = strtotime(date('m/d/Y H:i:s')) + 60 * 60;
             $jsonString = "{
                 \"api_key\": \"".self::ACESS_TOKEN."\",
                 \"order_id\": \"".$this->_track_id."\",
@@ -37,12 +37,12 @@ class TaskController extends BaseController{
                 \"job_pickup_name\": \"".$query['pickup_fullname']."\",
                 \"job_pickup_email\": \"\",
                 \"job_pickup_address\": \"frigate bay 1\",
-                \"job_pickup_datetime\": \"2016-08-14 19:00:00\",
+                \"job_pickup_datetime\": \"".date('m/d/Y H:i:s')."\",
                 \"customer_email\": \"zeoharlem@yahoo.co.uk\",
                 \"customer_username\": \"theophilus\",
                 \"customer_phone\": \"08067543641\",
                 \"customer_address\": \"frigate bay 2\",
-                \"job_delivery_datetime\": \"2016-08-14 21:00:00\",
+                \"job_delivery_datetime\": \"".date('m/d/Y H:i:s', $hourLater)."\",
                 \"has_pickup\": \"1\",
                 \"has_delivery\": \"1\",
                 \"layout_type\": \"0\",
