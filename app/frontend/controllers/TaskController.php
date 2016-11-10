@@ -38,7 +38,7 @@ class TaskController extends BaseController{
                 \"job_pickup_email\": \"\",
                 \"job_pickup_address\": \"".$query['pickup_address']."\",
                 \"job_pickup_datetime\": \"".date('m/d/Y H:i:s')."\",
-                \"customer_email\": \"".$query['delivery_email']."\",
+                \"customer_email\": \"\",
                 \"customer_username\": \"".$query['delivery_fullname']."\",
                 \"customer_phone\": \"".$query['delivery_phone']."\",
                 \"customer_address\": \"".$query['delivery_address']."\",
@@ -88,13 +88,13 @@ class TaskController extends BaseController{
                 $response       = $this->__curlRequestTask(
                         "https://api.tookanapp.com/v2/create_task", $jsonString);
                 $stringRespo    = json_decode($response);
-                if($stringRespo['status'] == self::ACESS_TOKEN){
+                if($stringRespo->status == self::ACESS_TOKEN){
                     $typeRespo->setJsonContent(array('task' => 'OK',
-                        'tookan'    => $stringRespo['data']));
+                        'tookan'    => $stringRespo->data));
                 }
                 else{
                     $typeRespo->setJsonContent(array(
-                        'task' => 'ERROR', 'tookan' => $stringRespo['data']));
+                        'task' => $pickup_delivery->getMessages(),'tookan' => $stringRespo->data));
                 }
             }
         }

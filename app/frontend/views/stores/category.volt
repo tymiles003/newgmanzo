@@ -178,15 +178,15 @@ ul.departments-list li{
           <div class="row products-category">
           {% for keys,values in pager.getPaginate().items %}
             <div class="product-layout product-list col-xs-12">
-              <div class="product-thumb">
+              <div class="product-thumb" id="item{{values.product_id}}">
                     <div class="image">
-                        <a href="product.html">
-                            <img alt="{{values.title | capitalize}}" id="item{{keys+1}}_img" src="{{url('assets/uploads/'~values.front_image)}}" class="img-responsive" />
+                        <a href="javascript:void(0);">
+                            <img alt="{{values.title | capitalize}}" id="item{{values.product_id}}_img" src="{{url('assets/uploads/'~values.front_image)}}" class="img-responsive" />
                         </a>
                         
-                        <input type="hidden" id="item{{keys+1}}_name" value="{{values.title | capitalize}}">
-                        <input type="hidden" id="item{{keys+1}}_price" value="{{values.sale_price}}">
-                        <input type="hidden" id="item{{keys+1}}_pro_id" value="{{values.product_id}}">
+                        <input type="hidden" id="item{{values.product_id}}_name" value="{{values.title | capitalize}}">
+                        <input type="hidden" id="item{{values.product_id}}_price" value="{{values.sale_price}}">
+                        <input type="hidden" id="item{{values.product_id}}_pro_id" value="{{values.product_id}}">
                     </div>
                 <div>
                   <div class="caption">
@@ -196,7 +196,7 @@ ul.departments-list li{
                     <p class="price"> <span class="price-new">${{values.sale_price}}</span> <span class="price-old">$0</span> <span class="saving">0%</span> <span class="price-tax"></span> </p>
                   </div>
                   <div class="button-group">
-                    <button class="btn-primary addToCart" type="button" onClick=""><span>Add to Cart</span></button>
+                    <button class="btn-primary addToCart" id="item{{values.product_id}}" type="button" onClick=""><span>Add to Cart</span></button>
                     <div class="add-to-links">
                       <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i> <span>Add to Wish List</span></button>
                     </div>
