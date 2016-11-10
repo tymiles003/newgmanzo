@@ -27,8 +27,8 @@
                     })
                 },
                 success:    function(response,status,xhr){
-                    if(response.status == 200 && xhr.readyState == 4){
-                        bootbox.alert('<h4>Task Performed! '+response.message+'</h4>', function(){
+                    if(response.task == 'OK' && xhr.readyState == 4){
+                        bootbox.alert('<h4>Task Performed! '+response.tookan.message+'</h4>', function(){
                             $('#pickUpModal').modal('hide');
                         });
                     }

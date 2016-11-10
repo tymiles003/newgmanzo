@@ -36,12 +36,12 @@ class TaskController extends BaseController{
                 \"job_pickup_phone\": \"".$query['pickup_phone']."\",
                 \"job_pickup_name\": \"".$query['pickup_fullname']."\",
                 \"job_pickup_email\": \"\",
-                \"job_pickup_address\": \"frigate bay 1\",
+                \"job_pickup_address\": \"".$query['pickup_address']."\",
                 \"job_pickup_datetime\": \"".date('m/d/Y H:i:s')."\",
-                \"customer_email\": \"zeoharlem@yahoo.co.uk\",
-                \"customer_username\": \"theophilus\",
-                \"customer_phone\": \"08067543641\",
-                \"customer_address\": \"frigate bay 2\",
+                \"customer_email\": \"".$query['delivery_email']."\",
+                \"customer_username\": \"".$query['delivery_fullname']."\",
+                \"customer_phone\": \"".$query['delivery_phone']."\",
+                \"customer_address\": \"".$query['delivery_address']."\",
                 \"job_delivery_datetime\": \"".date('m/d/Y H:i:s', $hourLater)."\",
                 \"has_pickup\": \"1\",
                 \"has_delivery\": \"1\",
@@ -70,7 +70,7 @@ class TaskController extends BaseController{
                       \"data\": \"100\"
                     }
                 ],
-                \"fleet_id\": \"11673\",
+                \"fleet_id\": \"17769\",
                 \"p_ref_images\": [
                     \"http://tookanapp.com/wp-content/uploads/2015/11/logo_dark.png\",
                     \"http://tookanapp.com/wp-content/uploads/2015/11/logo_dark.png\"
@@ -83,11 +83,24 @@ class TaskController extends BaseController{
                 \"tags\": \"\",
                 \"geofence\": 0
             }";
-            $response   = $this->__curlRequestTask(
-                    "https://api.tookanapp.com/v2/create_task", $jsonString);
-            var_dump($response);
+            $pickup_delivery    = new \Multiple\Frontend\Models\Pickupdelivery();
+            if($pickup_delivery != false){
+                $response       = $this->__curlRequestTask(
+                        "https://api.tookanapp.com/v2/create_task", $jsonString);
+                $stringRespo    = json_decode($response);
+                if($stringRespo['status'] == self::ACESS_TOKEN){
+                    $typeRespo->setJsonContent(array('task' => 'OK',
+                        'tookan'    => $stringRespo['data']));
+                }
+                else{
+                    $typeRespo->setJsonContent(array(
+                        'task' => 'ERROR', 'tookan' => $stringRespo['data']));
+                }
+            }
         }
         $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_NO_RENDER);
+        $typeRespo->setHeader('Content-Type', 'application/json');
+        $typeRespo->send(); exit();
         return;
     }
     

@@ -179,7 +179,7 @@ class OrderController extends BaseController{
                             \"data\": \"\"
                           }
                         ],
-                        \"fleet_id\": \"\",
+                        \"fleet_id\": \"17769\",
                         \"p_ref_images\": [
                           \"http://tookanapp.com/wp-content/uploads/2015/11/logo_dark.png\",
                           \"http://tookanapp.com/wp-content/uploads/2015/11/logo_dark.png\"
