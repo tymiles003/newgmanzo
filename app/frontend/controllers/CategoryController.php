@@ -36,4 +36,8 @@ class CategoryController extends BaseController{
         $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_ACTION_VIEW);
         return;
     }
+    
+    private function __getHighestSelling(){
+        
+    }
 }
