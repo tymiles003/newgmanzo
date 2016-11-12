@@ -58,8 +58,10 @@
             <h3 class="subtitle">Categories - <a class="viewall" href="category.tpl">view all</a></h3>
             <div class="category-module-content">
               <ul id="sub-cat" class="tabs">
+              <?php $counter = 1; ?>
               {% for keys, values in available %}
-                <li><a href="#tab-cat{{values['product_id']}}">{{values['category_name'] | capitalize}}</a></li>
+                <li><a href="#tab-cat<?php echo $counter; ?>">{{values['category_name'] | capitalize}}</a></li>
+                <?php $counter++; ?>
               {% endfor %}
               </ul>
               <div id="tab-cat1" class="tab_content">

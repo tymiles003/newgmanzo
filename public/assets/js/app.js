@@ -40,8 +40,25 @@
         });
         
         $('#pickUpModal').on('hidden.bs.modal', function(){
-            window.location.reload();
+            //window.location.reload();
         });
+        
+        $(document).on('click','#loginToProceed', function(){
+            var formVarString   = $('#picklogin').serialize();
+            $.post('http://localhost/newgmanzo/login/ajaxLogin', formVarString, function(data){
+                var StringJson  = $.parseJSON(JSON.stringify(data));
+                if(StringJson.status == 'OK'){
+                    $('#picklogin').text('Please Wait! Checking...');
+                    setTimeout(function(){
+                        $('#pickUpModal').modal('hide');
+                        window.location.href = 'http://localhost/newgmanzo/order'
+                    }, 2000);
+                }
+                else{
+                    window.alert('Not Valid Details');
+                }
+            })
+        })
 //        $('#pick_date').datetimepicker({
 //            format:'m/d/Y H:i:s',
 //        });
