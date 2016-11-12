@@ -16,8 +16,10 @@ namespace Multiple\Frontend;
 use Phalcon\Loader;
 use Phalcon\Config\Adapter\Ini as ConfigIni;
 use Phalcon\DiInterface;
-use Phalcon\Mvc\Dispatcher;
+use Phalcon\Mvc\Dispatcher as MvcDispatcher;
 use Phalcon\Mvc\ModuleDefinitionInterface;
+use Phalcon\Mvc\Dispatcher\Exception as DispatcherException;
+use Phalcon\Dispatcher;
 
 class Module implements ModuleDefinitionInterface{
     
@@ -174,6 +176,29 @@ class Module implements ModuleDefinitionInterface{
         //Custom Dispatcher (Overides the Default)
         $di->set('dispatcher', function() use ($di){
             $eventsManager = $di->getShared('eventsManager');
+            
+            $eventsManager->attach("dispatch:beforeException", function($event, $dispatch, $exception){
+                if($exception instanceof DispatcherException){
+                    $dispatch->forward(array(
+                        'controller'    => 'error',
+                        'action'        => 'show404'
+                    ));
+                    return false;
+                }
+                //echo Dispatcher::EXCEPTION_CYCLIC_ROUTING; exit;
+                switch($exception->getCode()){
+                    case Dispatcher::EXCEPTION_INVALID_HANDLER:
+                    case Dispatcher::EXCEPTION_ACTION_NOT_FOUND:
+                    case Dispatcher::EXCEPTION_HANDLER_NOT_FOUND:
+                    case Dispatcher::EXCEPTION_CYCLIC_ROUTING:
+                        $dispatch->forward(array(
+                            'controller'    => 'error',
+                            'action'        => 'show404'
+                        ));
+                        return false;
+                }
+            });
+            
             //Custom ACL Class
             $permission = new Config\Permission();
             //Listen for events from the permission class
@@ -181,7 +206,7 @@ class Module implements ModuleDefinitionInterface{
             $eventsManager->attach('dispatch', Plugins\LoggersPlugin::getLoggerInst());
             $eventsManager->attach('dispatch', Plugins\ExceptionsPlugin::getExceptionInst());
 
-            $dispatcher = new Dispatcher();
+            $dispatcher = new MvcDispatcher();
             $dispatcher->setDefaultNamespace("Multiple\Frontend\Controllers\\");
             $dispatcher->setEventsManager($eventsManager);
             return $dispatcher;

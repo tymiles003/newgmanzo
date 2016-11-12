@@ -25,6 +25,7 @@ class Permission extends \Phalcon\Mvc\User\Plugin{
     
     protected $_publicResources = array(
         'index'     => ['*'],
+        'error'     => ['*'],
         'stores'    => ['*'],
         'setlocal'  => ['*'],
         'login'     => ['*'],
