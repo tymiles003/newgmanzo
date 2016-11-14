@@ -11,27 +11,35 @@
         //starting the pick up and delivery task
         $(document).on('click','button#createTask', function(e){
             e.preventDefault();
+            var clonePickUp;
             var formSerialize   = $('#pickUpDeliver').serialize();
             $.ajax({
                 type:   'POST',
                 url:    'http://localhost/newgmanzo/task',
                 data:   formSerialize,
+                jsonType: 'json',
                 beforeSend: function(){
+                    clonePickUp = $('#pickUpDeliver').clone(true);
                     $('#pickUpDeliver').find('input, textarea').each(function(k,v){
                         if(!$.trim($(v).val())){
                             var taskField   = $.trim($(v).attr('name')).split('_');
                             window.alert(ucwords(taskField[0]+' '+taskField[1])+' is empty');
                             return false;
                         }
-                        $('#pickUpDeliver').text('Please Wait! Task Processing...');
+                        $('#pickUpDeliver').html('Please Wait! Task Processing...');
                     })
                 },
                 success:    function(response,status,xhr){
-                    if(response.task == 'OK' && xhr.readyState == 4){
-                        bootbox.alert('<h4>Task Performed! '+response.tookan.message+'</h4>', function(){
+                    //if(response.task == 'OK'){
+                        bootbox.alert('<h4>Task Performed! '+response.tookan.customer_name+'</h4>', function(){
                             $('#pickUpModal').modal('hide');
+                            //$('#pickUpModal').html(clonePickUp);
+                            window.location.reload();
                         });
-                    }
+                    //}
+                },
+                error:      function(xhr, status, error){
+                    window.alert(JSON.stringify(error));
                 },
                 complete:   function(xhr,status){
                     //$('#pickUpModal').modal('hide');
@@ -73,18 +81,15 @@
                 success: function(response){
                     cartStackFlow().getCartFlowId();
                     if(response.status == true){
-                        $.post('http://localhost/newgmanzo/order/fixAssignTeam', {data: serialFormFlow}, function(data){
-                            var jsonResult  = $.parseJSON(JSON.stringify(data));
-                            if(jsonResult.data.status == 200){
-                                $('#view-alert').find('monitor').html('<a href="'+
-                                        jsonResult.data.data.delivery_tracing_link+'">click</a>');
-                                $('#view-alert').find('order_id').html(jsonResult.order_id)
-                                $('#view-alert').fadeIn();
-                            }
-                        });
+                        $('#view-alert').find('#monitor').html('<a href="'+
+                                response.tokan.delivery_tracing_link+'">click</a>');
+                        $('#view-alert').find('#order_id').html(response.tokan.order_id)
+                        $('#view-alert').fadeIn();
                     }
                     else{
-                        alert(response.data);
+                        bootbox.alert('Error Message:'+JSON.stringify(response.tokan), function(){
+                            window.location.reload();
+                        });
                     }
                 }
             });
