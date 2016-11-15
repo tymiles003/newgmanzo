@@ -25,11 +25,11 @@ class IndexController extends BaseController{
         $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_MAIN_LAYOUT);
     }
     
-    public function show404(){
+    public function show404Action(){
         
     }
     
-    public function show409(){
+    public function show409Action(){
         
     }
 }

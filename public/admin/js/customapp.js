@@ -26,7 +26,7 @@
           "responsive": true,
           "processing": true,
           "serverSide": true,
-          "ajax": "http://localhost/gmanzomulti/backend/products/tableProduct",
+          "ajax": "http://localhost/newgmanzo/backend/products/tableProduct",
           "columnDefs": [{
                 "targets": -1,
                 "data": null,
@@ -35,7 +35,7 @@
             {
                 "render": function(data, type, row){
                     //return data + '{' + row[4] + '}';
-                    return '<img class="img-responsive" width="30%" src="http://localhost/gmanzomulti/assets/uploads/'+data+'" />';
+                    return '<img class="img-responsive" width="30%" src="http://localhost/newgmanzo/assets/uploads/'+data+'" />';
                 },
                 "targets": 4
             },
@@ -72,7 +72,7 @@
           "responsive": true,
           "processing": true,
           "serverSide": true,
-          "ajax": "http://localhost/gmanzomulti/backend/order/tableShow",
+          "ajax": "http://localhost/newgmanzo/backend/order/tableShow",
           "columnDefs": [{
                 "targets": -1,
                 "data": null,
@@ -81,7 +81,7 @@
             {
                 "render": function(data, type, row){
                     //return data + '{' + row[4] + '}';
-                    return '<img class="img-responsive" width="30%" src="http://localhost/gmanzomulti/backend/assets/uploads/'+data+'" />';
+                    return '<img class="img-responsive" width="30%" src="http://localhost/newgmanzo/backend/assets/uploads/'+data+'" />';
                 },
                 "targets": 5
             },
@@ -115,7 +115,7 @@
           responsive: true,
           "processing": true,
           "serverSide": true,
-          "ajax": "http://localhost/gmanzomulti/backend/order",
+          "ajax": "http://localhost/newgmanzo/backend/order",
           "columnDefs": [{
                 "targets": -1,
                 "data": null,
@@ -135,7 +135,7 @@
         });
         
         $('#examplePositionSidebar').on('shown.bs.modal', function(e){
-            $.post('http://localhost/gmanzomulti/backend/order/view', {trans:dataRowTrans_id}, function(htmlString){
+            $.post('http://localhost/newgmanzo/backend/order/view', {trans:dataRowTrans_id}, function(htmlString){
                 $('.modal-title > span').text(dataRowTrans_id);
                 $('.modal-body').html(htmlString)
             })

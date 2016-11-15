@@ -130,7 +130,7 @@ class Module implements ModuleDefinitionInterface{
         //Setup a base URI so that all generated URIs include the tutorial folder
         $di->set('url', function(){
             $url = new \Phalcon\Mvc\Url();
-            $url->setBaseUri("/gmanzomulti/");
+            $url->setBaseUri("/newgmanzo/");
             return $url;
         });
 
