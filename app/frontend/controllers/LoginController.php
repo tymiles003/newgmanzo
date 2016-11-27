@@ -50,6 +50,31 @@ class LoginController extends BaseController{
         $this->response->redirect('checkout/process?token=' . uniqid());
     }
     
+    public function ajaxLoginAction(){
+        $register   = Register::findFirstByEmail(
+                    $this->request->getPost('email'));
+        if($register != false){
+            $typeRes    = new \Phalcon\Http\Response();
+            if($this->security->checkHash($this->request->getPost(
+                    'password'), $register->password)){
+                $this->__registerSession($register);
+                $typeRes->setJsonContent(array('status' => 'OK'));
+                $typeRes->setHeader('Content-Type','application/json');
+                $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_NO_RENDER);
+                $this->flash->success('You are welcome '.$register->firstname);
+                $typeRes->send();                exit();
+            }
+            else{
+                $typeRes->setJsonContent(array('status' => 'ERROR'));
+                $typeRes->setHeader('Content-Type','application/json');
+                $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_NO_RENDER);
+                $typeRes->send();                exit();
+            }
+        }
+        $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_NO_RENDER);
+        return;
+    }
+
     private function __registerSession(Register $register){
         $this->session->set('auth', array(
             'role'          => $register->role,

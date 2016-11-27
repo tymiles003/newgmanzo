@@ -17,10 +17,10 @@
           <h3 class="subtitle">Best Selling</h3>
           <div class="side-item">
             <div class="product-thumb clearfix">
-              <div class="image"><a href="product.html"><img src="image/product/apple_cinema_30-50x50.jpg" alt="Brand Fashion Cotton T-Shirt" title="Brand Fashion Cotton T-Shirt" class="img-responsive" /></a></div>
+              <div class="image"><a href="#"><img src="image/product/apple_cinema_30-50x50.jpg" alt="Stack Honey" title="Stack Honey" class="img-responsive" /></a></div>
               <div class="caption">
-                <h4><a href="product.html">Brand Fashion Cotton T-Shirt</a></h4>
-                <p class="price"><span class="price-new">$110.00</span> <span class="price-old">$122.00</span> <span class="saving">-10%</span></p>
+                <h4><a href="#">Stack Honey</a></h4>
+                <p class="price"><span class="price-new">&#8358;110.00</span> <span class="price-old">&#8358;122.00</span> <span class="saving">-10%</span></p>
               </div>
             </div>
             
@@ -65,25 +65,25 @@
           <div class="row products-category">
           {% for keys,values in pager.getPaginate().items %}
             <div class="product-layout product-list col-xs-12">
-              <div class="product-thumb">
+              <div class="product-thumb" id="item{{values.product_id}}">
                     <div class="image">
-                        <a href="product.html">
-                            <img alt="{{values.title | capitalize}}" id="item{{keys+1}}_img" src="{{url('assets/uploads/'~values.front_image)}}" class="img-responsive" />
+                        <a href="#">
+                            <img alt="{{values.title | capitalize}}" id="item{{values.product_id}}_img" src="{{url('assets/uploads/'~values.front_image)}}" class="img-responsive" />
                         </a>
                         
-                        <input type="hidden" id="item{{keys+1}}_name" value="{{values.title | capitalize}}">
-                        <input type="hidden" id="item{{keys+1}}_price" value="{{values.sale_price}}">
-                        <input type="hidden" id="item{{keys+1}}_pro_id" value="{{values.product_id}}">
+                        <input type="hidden" id="item{{values.product_id}}_name" value="{{values.title | capitalize}}">
+                        <input type="hidden" id="item{{values.product_id}}_price" value="{{values.sale_price}}">
+                        <input type="hidden" id="item{{values.product_id}}_pro_id" value="{{values.product_id}}">
                     </div>
                 <div>
                   <div class="caption">
-                    <h4><a href="product.html"> {{values.title | capitalize}} </a></h4>
+                    <h4><a href="#"> {{values.title | capitalize}} </a></h4>
                     <p class="description"> {{values.description | capitalize}}</p>
                     <div class="rating"><small>By {{convert(values.added_by,'display_name')}} | {{address(values.added_by,'address1') | capitalize}}</small></div>
-                    <p class="price"> <span class="price-new">${{values.sale_price}}</span> <span class="price-old">$0</span> <span class="saving">0%</span> <span class="price-tax"></span> </p>
+                    <p class="price"> <span class="price-new">&#8358;{{values.sale_price}}</span> <span class="price-old">&#8358;0</span> <span class="saving">0%</span> <span class="price-tax"></span> </p>
                   </div>
                   <div class="button-group">
-                    <button class="btn-primary addToCart" type="button" onClick=""><span>Add to Cart</span></button>
+                    <button class="btn-primary addToCart" id="item{{values.product_id}}" type="button" onClick=""><span>Add to Cart</span></button>
                     <div class="add-to-links">
                       <button type="button" data-toggle="tooltip" title="Add to Wish List" onClick=""><i class="fa fa-heart"></i> <span>Add to Wish List</span></button>
                     </div>

@@ -88,14 +88,18 @@ class TaskController extends BaseController{
                 $response       = $this->__curlRequestTask(
                         "https://api.tookanapp.com/v2/create_task", $jsonString);
                 $stringRespo    = json_decode($response);
-                if($stringRespo->status == self::ACESS_TOKEN){
+                if($stringRespo->status == self::ACTION_COMPLETE){
                     $typeRespo->setJsonContent(array('task' => 'OK',
                         'tookan'    => $stringRespo->data));
                 }
                 else{
                     $typeRespo->setJsonContent(array(
-                        'task' => $pickup_delivery->getMessages(),'tookan' => $stringRespo->data));
+                        'task' => 'ERROR','tookan' => $stringRespo->data));
                 }
+            }
+            else{
+                $typeRespo->setJsonContent(array(
+                    'task' => $pickup_delivery->getMessages()));
             }
         }
         $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_NO_RENDER);

@@ -327,7 +327,7 @@
 	  	<button type="button" class="btn-upper btn btn-primary checkout-page-button" id="createTask">Create Task</button>
 	</form>
         {% else %}
-            <form class="register-form outer-top-xs" role="form" method="post" action="{{url('login/')}}">
+        <form class="register-form outer-top-xs" id="picklogin" role="form" method="post">
 		<div class="form-group">
 		    <label class="info-title" for="email">Email Address <span>*</span></label>
 		    <input type="email" placeholder="Enter your email address" name="email" class="form-control unicase-form-control text-input" id="email" >

@@ -27,7 +27,7 @@
   <div data-animsition-out="fade-out" data-animsition-in="fade-in" class="page animsition vertical-align text-center" style="animation-duration: 0s; opacity: 1;">
     <div class="page-content vertical-align-middle">
       <div class="brand">
-        <img alt="..." src="{{url('assets/images/logo.png')}}" class="brand-img">
+        <img alt="..." src="{{url('admin/images/logo.png')}}" class="brand-img">
         
       </div>
       <p>Sign into your pages account</p>
@@ -51,7 +51,7 @@
         </div>
         <button class="btn btn-primary btn-block" type="submit">Sign in</button>
       </form>
-      <p>Still no account? Please go to <a href="register.html">Register</a></p>
+      <p>Still no account? Please go to <a href="#">Register</a></p>
 
       <footer class="page-copyright">
         <p>SALES APP BY <strong>creativemeshKernel</strong></p>

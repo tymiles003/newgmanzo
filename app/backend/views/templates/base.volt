@@ -548,37 +548,6 @@
             </li>
             
             <li class="site-menu-category">Elements</li>
-            <li class="site-menu-item has-sub">
-              <a data-slug="uikit" href="javascript:void(0)">
-                <i aria-hidden="true" class="site-menu-icon wb-bookmark"></i>
-                <span class="site-menu-title">Stock Control</span>
-                <span class="site-menu-arrow"></span>
-              </a>
-              <ul class="site-menu-sub">
-                <li class="site-menu-item">
-                  <a data-slug="uikit-buttons" href="#" class="animsition-link">
-                    <i aria-hidden="true" class="site-menu-icon "></i>
-                    <span class="site-menu-title">Create Stock</span>
-                  </a>
-                </li>
-                
-                <li class="site-menu-item">
-                  <a data-slug="uikit-typography" href="#" class="animsition-link">
-                    <i aria-hidden="true" class="site-menu-icon "></i>
-                    <span class="site-menu-title">Manage Stock</span>
-                    <div class="site-menu-badge">
-                      <span class="badge badge-primary">5</span>
-                    </div>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a data-slug="uikit-utilities" href="#" class="animsition-link">
-                    <i aria-hidden="true" class="site-menu-icon "></i>
-                    <span class="site-menu-title">Stock Account(s)</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
             
             <li class="site-menu-item has-sub">
               <a data-slug="advanced" href="javascript:void(0)">
@@ -614,67 +583,7 @@
                 
               </ul>
             </li>
-            <li class="site-menu-item has-sub">
-              <a data-slug="structure" href="javascript:void(0)">
-                <i aria-hidden="true" class="site-menu-icon wb-plugin"></i>
-                <span class="site-menu-title">Order Transaction</span>
-                <span class="site-menu-arrow"></span>
-              </a>
-              <ul class="site-menu-sub">
-                <li class="site-menu-item">
-                  <a data-slug="structure-alerts" href="#" class="animsition-link">
-                    <i aria-hidden="true" class="site-menu-icon "></i>
-                    <span class="site-menu-title">Order Chart</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a data-slug="structure-blockquotes" href="#" class="animsition-link">
-                    <i aria-hidden="true" class="site-menu-icon "></i>
-                    <span class="site-menu-title">Daily Order(s)</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a data-slug="structure-breadcrumbs" href="#" class="animsition-link">
-                    <i aria-hidden="true" class="site-menu-icon "></i>
-                    <span class="site-menu-title">View Order-Wider</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a data-slug="structure-cover" href="#" class="animsition-link">
-                    <i aria-hidden="true" class="site-menu-icon "></i>
-                    <span class="site-menu-title">Manage Order(s)</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
             
-            <li class="site-menu-item has-sub">
-              <a data-slug="widgets" href="javascript:void(0)">
-                <i aria-hidden="true" class="site-menu-icon wb-extension"></i>
-                <span class="site-menu-title">Create Account(s)</span>
-                <span class="site-menu-arrow"></span>
-              </a>
-              <ul class="site-menu-sub">
-                <li class="site-menu-item">
-                  <a data-slug="widgets-blog" href="#" class="animsition-link">
-                    <i aria-hidden="true" class="site-menu-icon "></i>
-                    <span class="site-menu-title">Staff | App User(s)</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a data-slug="widgets-data" href="#" class="animsition-link">
-                    <i aria-hidden="true" class="site-menu-icon "></i>
-                    <span class="site-menu-title">Manage Staff | App User(s)</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a data-slug="widgets-chart" href="#" class="animsition-link">
-                    <i aria-hidden="true" class="site-menu-icon "></i>
-                    <span class="site-menu-title">Active Staff</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
             <li class="site-menu-item has-sub">
               <a data-slug="forms" href="javascript:void(0)">
                 <i aria-hidden="true" class="site-menu-icon wb-library"></i>
@@ -704,97 +613,8 @@
               </ul>
             </li>
             
-            <li class="site-menu-item has-sub">
-              <a data-slug="tables" href="javascript:void(0)">
-                <i aria-hidden="true" class="site-menu-icon wb-table"></i>
-                <span class="site-menu-title">Customer(s) Change</span>
-                <span class="site-menu-arrow"></span>
-              </a>
-              <ul class="site-menu-sub">
-                <li class="site-menu-item">
-                  <a data-slug="tables-basic" href="#" class="animsition-link">
-                    <i aria-hidden="true" class="site-menu-icon "></i>
-                    <span class="site-menu-title">Create Change</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a data-slug="tables-bootstrap" href="#" class="animsition-link">
-                    <i aria-hidden="true" class="site-menu-icon "></i>
-                    <span class="site-menu-title">Manage Change</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a data-slug="tables-responsive" href="#" class="animsition-link">
-                    <i aria-hidden="true" class="site-menu-icon "></i>
-                    <span class="site-menu-title">Change Transaction Table</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a data-slug="tables-datatable" href="#" class="animsition-link">
-                    <i aria-hidden="true" class="site-menu-icon "></i>
-                    <span class="site-menu-title">Search Customer's Change</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            
             <li class="site-menu-category"><strong>Apps</strong></li>
-            <li class="site-menu-item has-sub">
-              <a data-slug="app" href="javascript:void(0)">
-                <i aria-hidden="true" class="site-menu-icon wb-grid-4"></i>
-                <span class="site-menu-title">Shop(s)</span>
-                <span class="site-menu-arrow"></span>
-              </a>
-              <ul class="site-menu-sub">
-                <li class="site-menu-item">
-                  <a data-slug="chart-chartist" href="#" class="animsition-link">
-                    <i aria-hidden="true" class="site-menu-icon "></i>
-                    <span class="site-menu-title">Create Shops</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a data-slug="chart-c3" href="{{url('backend/shops/manage')}}" class="animsition-link">
-                    <i aria-hidden="true" class="site-menu-icon "></i>
-                    <span class="site-menu-title">Manage Shops</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a data-slug="chart-chartjs" href="#" class="animsition-link">
-                    <i aria-hidden="true" class="site-menu-icon "></i>
-                    <span class="site-menu-title">Shops Activities</span>
-                  </a>
-                </li>
-                
-              </ul>
-            </li>
-            <li class="site-menu-item has-sub">
-              <a data-slug="app" href="javascript:void(0)">
-                <i aria-hidden="true" class="site-menu-icon wb-grid-4"></i>
-                <span class="site-menu-title">Delivery(ies)</span>
-                <span class="site-menu-arrow"></span>
-              </a>
-              <ul class="site-menu-sub">
-                <li class="site-menu-item">
-                  <a data-slug="chart-chartist" href="#" class="animsition-link">
-                    <i aria-hidden="true" class="site-menu-icon "></i>
-                    <span class="site-menu-title">Create Shops</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a data-slug="chart-c3" href="#" class="animsition-link">
-                    <i aria-hidden="true" class="site-menu-icon "></i>
-                    <span class="site-menu-title">Manage Shops</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                  <a data-slug="chart-chartjs" href="#" class="animsition-link">
-                    <i aria-hidden="true" class="site-menu-icon "></i>
-                    <span class="site-menu-title">Shops Activities</span>
-                  </a>
-                </li>
-                
-              </ul>
-            </li>
+            
           </ul>
 
         </div>
