@@ -350,8 +350,129 @@
 //            $('#list_agents').html(textsFlow);
 //        }
 //    })
+//Customer Controller System
+    var getPack    = $('#getPack').DataTable({
+        responsive: true,
+        "processing": true,
+        "serverSide": true,
+        "ajax": "http://localhost/newgmanzo/customer/purchases",
+        "columnDefs": [{
+              "targets": -1,
+              "data": null,
+              "defaultContent": "<button type='button' class='btn btn-danger getPack'><small>View Now</small></button>"
+          }],
+        //"sDom": "t" // just show table, no other controls
+        "footerCallback": function(row, data, start, end, display){
+            var api = this.api(), data, total, pageTotal;
+            // Remove the formatting to get integer data for summation
+            var intVal  = function(i){
+                return typeof i == 'string' ? i.replace(/[\$,]/g, '')*1 : typeof i === 'number' ? i : 0;
+            };
 
+            //Total Pages over all
+            total   = api.column(3).data().reduce(function(a,b){
+                return intVal(a) + intVal(b);
+            }, 0);
+
+            //Total over this page
+            pageTotal   = api.column(3, {page:'current'}).data().reduce(function(a,b){
+                return intVal(a) + intVal(b);
+            }, 0);
+
+            //update footer
+            $(api.column(3).footer()).html(pageTotal+' $('+total+' Total)');
+        }
+    });
+    
+    //Customer Controller System
+    var getCustomer    = $('#getCustomers').DataTable({
+        responsive: true,
+        "processing": true,
+        "serverSide": true,
+        "ajax": "http://localhost/newgmanzo/customer/history",
+        "columnDefs": [{
+              "targets": -1,
+              "data": null,
+              "defaultContent": "<button type='button' class='btn btn-default btn-danger ordernow'><small>Track Now</small></button>"
+          }]
+        //"sDom": "t" // just show table, no other controls
+    });
+    
+    //Click to set customer for order
+    $('#getCustomers tbody').on('click', 'button.ordernow', function(){
+        var dataRow = getCustomer.row($(this).parents('tr')).data();
+        var stringRowData   = {action : 'remove', register_id: dataRow[6]};
+        if(dataRow[6].length == 0 || dataRow[6] == ''){
+            window.alert("Seems tracking link is not available");
+        }
+        else{
+            var windowL = window.open(dataRow[6], '_blank');
+            windowL.focus();
+        }
+    });
+    
+    //Click to set customer for order
+    $('#getPack tbody').on('click', 'button.getPack', function(){
+        var dataRow = getPack.row($(this).parents('tr')).data();
+        var tr = $(this).closest('tr');
+        var row = getPack.row( tr );
+
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+
+            //row.child(formatJsonString(row.data())).show();
+            row.child(formatJsonString(dataRow[4])).show();
+            tr.addClass('shown');
+        }
+    });
 })(jQuery);
+
+/* Formatting function for row details - modify as you need */
+function formatJsonString(d){
+    var tableFlow       = '';
+    var taskStringFlow  = [];
+    var JsonStringFlow  = $.parseJSON(d);
+    for(var n in JsonStringFlow){
+        taskStringFlow.push(JsonStringFlow[n]);
+    }
+
+    tableFlow = '<table cellpadding="5" cellspacing="0" border="0" class="table table-condensed" style="padding-left:50px; font-size:13px;">';
+
+    for(var i in taskStringFlow){
+        tableFlow += '<tr style="border:none !important;">'+
+            '<td style="border:none !important;">'+taskStringFlow[i].name+'</td>'+
+            '<td style="border:none !important;"><img src="'+taskStringFlow[i].image+'" class="img img-responsive" style="width:10%;" /></td>'+
+            '<td style="border:none !important;">'+taskStringFlow[i].qty+'</td>'+
+            '<td style="border:none !important;">'+taskStringFlow[i].price+'</td>'+
+            '<td style="border:none !important;">'+parseInt(taskStringFlow[i].qty) * parseInt(taskStringFlow[i].price)+'</td>'+
+        '</tr>'
+    }
+    tableFlow += '</table>';
+    return tableFlow;
+}
+
+function format ( d ) {
+    // `d` is the original data object for the row
+    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+        '<tr>'+
+            '<td>Full name:</td>'+
+            '<td>'+d.name+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Extension number:</td>'+
+            '<td>'+d.extn+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Extra info:</td>'+
+            '<td>And any further details here (images etc)...</td>'+
+        '</tr>'+
+    '</table>';
+}
 
 //Functions
 /**

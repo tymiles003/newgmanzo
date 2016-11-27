@@ -27,6 +27,7 @@ class BaseController extends Controller{
                 ->addCss('assets/css/owl.transitions.css')
                 ->addCss('assets/css/owl.theme.css')
                 ->addCss('assets/css/responsive.css')
+                ->addCss('assets/js/datatables/datatables.css')
                 ->addCss('assets/css/stylesheet-skin3.css')
                 ->addCss('assets/css/jquery.autocomplete.css')
                 ->addCss('assets/css/rateit.css')
@@ -44,6 +45,7 @@ class BaseController extends Controller{
         $this->assets->collection('footers')
                 ->addJs('assets/js/jquery-2.1.1.min.js')
                 ->addJs('assets/js/bootstrap/js/bootstrap.min.js')
+                ->addJs('assets/js/datatables/jquery.dataTables.js')
                 ->addJs('assets/js/datepicker_beta/jquery.datetimepicker.full.min.js')
                 ->addJs('assets/js/jquery.easing-1.3.min.js')
                 ->addJs('assets/js/owl.carousel.min.js')
@@ -57,7 +59,7 @@ class BaseController extends Controller{
     
     public function __dataTableJsCss(){
         $this->assets->collection('footers')
-                ->addJs('assets/js/datatables/jquery.dataTables.js')
+                //->addJs('assets/js/datatables/jquery.dataTables.js')
                 ->addJs('assets/js/bootbox.js');
     }
     
