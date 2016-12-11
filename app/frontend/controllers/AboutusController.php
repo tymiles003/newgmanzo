@@ -15,12 +15,28 @@ namespace Multiple\Frontend\Controllers;
  */
 class AboutusController extends BaseController{
     //put your code here
+    public function initialize() {
+        parent::initialize();
+        $this->view->setVar('category', 
+                \Multiple\Frontend\Models\Category::find()->toArray());
+    }
+    
     public function indexAction(){
         $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_ACTION_VIEW);
         return;
     }
     
     public function termsConAction(){
+        $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_ACTION_VIEW);
+        return;
+    }
+    
+    public function deliveryInfoAction(){
+        $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_ACTION_VIEW);
+        return;
+    }
+    
+    public function privacyPolicyAction(){
         $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_ACTION_VIEW);
         return;
     }

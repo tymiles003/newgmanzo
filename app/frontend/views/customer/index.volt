@@ -44,13 +44,10 @@
             <div id="grid-container">
 								<div class="contact-page">
 									<div class="row">
-                            <div class="alert alert-success view-alert hide"><strong>
-                                Thank you! Your delivery is being processed. Clear the order or Log out once you are done.
-                                Keep this:- Order Number:<span id="order_id"></span>
-                            </strong><p>Monitor your delivery <span id="monitor"></span></p></div>
+                            
                             <div class="col-md-8 col-sm-8 create-new-account">
                             <p>&nbsp;</p>
-	<h4 class="checkout-subtitle"><strong>BILLING DETAILS</strong></h4>
+	<h4 class="checkout-subtitle"><strong>ACCOUNT DETAILS</strong></h4>
 	<p class="text title-tag-line">All fields with <strong>*</strong> are required.</p>
         {{flash.output()}}
 	<form class="register-form outer-top-xs" id="billing-form" role="form" method="post">
@@ -68,16 +65,7 @@
                         </div>
                     </div>
                 </div>
-		<div class="form-group">
-                    <label class="info-title" for="exampleInputEmail2">Company Name </label>
-                    <input type="text" name="company" class="form-control unicase-form-control text-input" id="exampleInputEmail2" >
-	    	</div>
-                <div class="form-group">
-                    <label class="info-title" for="exampleInputEmail2">Delivery Date/Time <span>*</span></label>
-                    <input type="text" name="delivery_time" class="form-control unicase-form-control text-input" id="pick_date" >
-                    <input type="hidden" name="trans_id" class="form-control unicase-form-control text-input" value="{{track_id}}" >
-                    <input type="hidden" name="date_of_order" class="form-control unicase-form-control text-input" value="<?php echo date('Y-m-d h:i:s'); ?>" >
-	  	</div>
+		
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -93,32 +81,11 @@
                     </div>
                 </div>
 		<div class="form-group">
-	    	<label class="info-title" for="exampleInputEmail2">Home Address <span>*</span></label>
+	    	<label class="info-title" for="exampleInputEmail2">Password <span>*</span></label>
 	    	<input type="text" name="address" required class="form-control unicase-form-control text-input" id="exampleInputEmail2" placeholder="Street Address" >
 	  	</div>
-		<div class="form-group">
-	    	<label class="info-title" for="exampleInputEmail2">Town / City <span>*</span></label>
-	    	<input type="text" name="city" required class="form-control unicase-form-control text-input" id="exampleInputEmail2" placeholder="Town / City" >
-	  	</div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                        <label class="info-title" for="exampleInputEmail2">State <span>*</span></label>
-                        <input type="text" name="state" value="<?php echo @$_SESSION['strLocation']; ?>" required class="form-control unicase-form-control text-input" id="exampleInputEmail2" >
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                        <label class="info-title" for="exampleInputEmail2">Postcode / ZIP <span>*</span></label>
-                        <input type="number" name="postzip" required class="form-control unicase-form-control text-input" id="exampleInputEmail2" >
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-	    	<label class="info-title" for="exampleInputEmail2">Additional Information</label>
-	    	<textarea name="additional_info" class="form-control unicase-form-control text-input" id="exampleInputEmail2"></textarea>
-	  	</div>
-	  	<!--<button type="submit" class="btn-upper btn btn-primary checkout-page-button btn-lg">PLACE ORDER NOW</button>-->
+		
+	  	<button type="submit" class="btn-upper btn btn-primary checkout-page-button btn-lg">UPDATE NOW</button>
 	</form>
 	
 	<div class="checkbox">
@@ -154,9 +121,7 @@
             <td><strong>₦{{totalPrice}}</strong></td>
         </tr>
         </table>
-        <p>I've read and accepted the <strong>terms & conditions</strong></p>
-	<button type="submit" class="btn-upper btn-lg btn btn-default checkout-page-button" id="place-order"><small>PLACE ORDER NOW</small></button>
-	<a href="{{url('checkout/?clear=true')}}" class="btn-upper btn-lg btn btn-primary checkout-page-button" id="place-order"><small>CLEAR ORDER</small></a>
+        
         {% else %}<hr/>
         <strong>EMPTY CART(0)</strong>
         {% endif %}
