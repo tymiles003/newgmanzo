@@ -40,8 +40,8 @@ class Admin extends BaseModel{
     
     public function validation(){
         $this->validate(new Validator\Uniqueness(array(
-            "fields"    => "username",
-            "message"   => "Email Already Existed"
+            "field"    => "username",
+            "message"  => "Email Already Existed"
         )));
         
         if($this->validationHasFailed()){

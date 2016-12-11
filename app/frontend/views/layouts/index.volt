@@ -35,7 +35,7 @@
               </div>
               <div class="caption">
                 <h4><a href="{{url('store/details/'~values['product_id'])}}"><a href="detail.html" style="color:#333;">{{values['title'] | capitalize}}</a></a></h4>
-                <p class="price"> ${{values['sale_price']}} </p>
+                <p class="price"> &#8358;{{values['sale_price']}} </p>
                 <div class="rating">By {{convert(values['added_by'],'display_name')}} | {{address(values['added_by'],'address1') | capitalize}}</div>
                 <input type="hidden" id="item{{values['product_id']}}_name" value="{{values['title'] | capitalize}}">
                 <input type="hidden" id="item{{values['product_id']}}_price" value="{{values['sale_price']}}">
@@ -73,7 +73,7 @@
                     </div>
                     <div class="caption">
                       <h4><a href="{{url('store/details/'~values['product_id'])}}">{{values['title'] | capitalize}}</a></h4>
-                      <p class="price"> <span class="price-new">${{values['sale_price']}}</span> <span class="price-old">$0</span> <span class="saving">0%</span> 
+                      <p class="price"> <span class="price-new">&#8358;{{values['sale_price']}}</span> <span class="price-old">&#8358;0</span> <span class="saving">0%</span> 
                         <input type="hidden" id="item{{values['product_id']}}_name" value="{{values['title'] | capitalize}}">
                         <input type="hidden" id="item{{values['product_id']}}_price" value="{{values['sale_price']}}">
                         <input type="hidden" id="item{{values['product_id']}}_pro_id" value="{{values['product_id']}}">
@@ -99,7 +99,7 @@
                     </div>
                     <div class="caption">
                       <h4><a href="{{url('store/details/'~values['product_id'])}}">{{values['title'] | capitalize}}</a></h4>
-                      <p class="price"> <span class="price-new">${{values['sale_price']}}</span> <span class="price-old">$0</span> <span class="saving">0%</span> 
+                      <p class="price"> <span class="price-new">&#8358;{{values['sale_price']}}</span> <span class="price-old">&#8358;0</span> <span class="saving">0%</span> 
                         <input type="hidden" id="item{{values['product_id']}}_name" value="{{values['title'] | capitalize}}">
                         <input type="hidden" id="item{{values['product_id']}}_price" value="{{values['sale_price']}}">
                         <input type="hidden" id="item{{values['product_id']}}_pro_id" value="{{values['product_id']}}">
@@ -125,7 +125,7 @@
                     </div>
                     <div class="caption">
                       <h4><a href="{{url('store/details/'~values['product_id'])}}">{{values['title'] | capitalize}}</a></h4>
-                      <p class="price"> <span class="price-new">${{values['sale_price']}}</span> <span class="price-old">$0</span> <span class="saving">0%</span> 
+                      <p class="price"> <span class="price-new">&#8358;{{values['sale_price']}}</span> <span class="price-old">&#8358;0</span> <span class="saving">0%</span> 
                         <input type="hidden" id="item{{values['product_id']}}_name" value="{{values['title'] | capitalize}}">
                         <input type="hidden" id="item{{values['product_id']}}_price" value="{{values['sale_price']}}">
                         <input type="hidden" id="item{{values['product_id']}}_pro_id" value="{{values['product_id']}}">
@@ -151,7 +151,7 @@
                     </div>
                     <div class="caption">
                       <h4><a href="{{url('store/details/'~values['product_id'])}}">{{values['title'] | capitalize}}</a></h4>
-                      <p class="price"> <span class="price-new">${{values['sale_price']}}</span> <span class="price-old">$0</span> <span class="saving">0%</span> 
+                      <p class="price"> <span class="price-new">&#8358;{{values['sale_price']}}</span> <span class="price-old">&#8358;0</span> <span class="saving">0%</span> 
                         <input type="hidden" id="item{{values['product_id']}}_name" value="{{values['title'] | capitalize}}">
                         <input type="hidden" id="item{{values['product_id']}}_price" value="{{values['sale_price']}}">
                         <input type="hidden" id="item{{values['product_id']}}_pro_id" value="{{values['product_id']}}">
@@ -178,7 +178,7 @@
                     </div>
                     <div class="caption">
                       <h4><a href="{{url('store/details/'~values['product_id'])}}">{{values['title'] | capitalize}}</a></h4>
-                      <p class="price"> <span class="price-new">${{values['sale_price']}}</span> <span class="price-old">$0</span> <span class="saving">0%</span> 
+                      <p class="price"> <span class="price-new">&#8358;{{values['sale_price']}}</span> <span class="price-old">&#8358;0</span> <span class="saving">0%</span> 
                         <input type="hidden" id="item{{values['product_id']}}_name" value="{{values['title'] | capitalize}}">
                         <input type="hidden" id="item{{values['product_id']}}_price" value="{{values['sale_price']}}">
                         <input type="hidden" id="item{{values['product_id']}}_pro_id" value="{{values['product_id']}}">
@@ -205,7 +205,7 @@
                     </div>
                     <div class="caption">
                       <h4><a href="{{url('store/details/'~values['product_id'])}}">{{values['title'] | capitalize}}</a></h4>
-                      <p class="price"> <span class="price-new">${{values['sale_price']}}</span> <span class="price-old">$0</span> <span class="saving">0%</span> 
+                      <p class="price"> <span class="price-new">&#8358;{{values['sale_price']}}</span> <span class="price-old">&#8358;0</span> <span class="saving">0%</span> 
                         <input type="hidden" id="item{{values['product_id']}}_name" value="{{values['title'] | capitalize}}">
                         <input type="hidden" id="item{{values['product_id']}}_price" value="{{values['sale_price']}}">
                         <input type="hidden" id="item{{values['product_id']}}_pro_id" value="{{values['product_id']}}">
@@ -245,7 +245,7 @@
         </p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="lnk btn" data-dismiss="modal" style="background:none;">Close Window</button>
+        <button type="button" class="lnk btn" data-dismiss="modal">Close Window</button>
         <!--<button type="button" class="lnk btn btn-lg" style="background:white; border:1px solid #444; color:#444;"><strong>Display Shops</strong></button>-->
       </div>
     </div><!-- /.modal-content -->

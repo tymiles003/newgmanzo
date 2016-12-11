@@ -119,3 +119,10 @@ a:hover, a b:hover, .category .tabs li a:hover, .sitemap li a:hover, .pagination
 #menu .navbar-header > span > b:before { border-color: transparent transparent #fff; }
 #menu .navbar-header > span > b:after { border-color:#fff transparent transparent; }
 #menu .nav > li > span.submore:after { color:#fff; }
+
+.modal-backdrop {
+    background: url('../../public/assets/image/backdrop.jpg');
+    background-size: cover;
+    opacity: 1 !important;
+    filter: Alpha(Opacity=100);
+}

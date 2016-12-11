@@ -23,7 +23,9 @@ class OrderController extends BaseController{
     //put your code here
     private $_track;
     //const ACESS_TOKEN = 'e824c4f685bca92ed63ffd522a855f52';
-    const ACESS_TOKEN = 'df6bb34d1342938032946e88cce350dcce17d58c2267a0c74474b933be45823a';
+    //const ACESS_TOKEN = 'df6bb34d1342938032946e88cce350dcce17d58c2267a0c74474b933be45823a';
+    //This Key Belongs to GMANZO Company not to be used anytime by another company
+    const ACESS_TOKEN = '29f741c22519903ae0428adaef01b0de23d2e0307626d82470ccf74fccb6d05b';
     const PARAMETER_MISSING = 100, ACTION_COMPLETE = 200, SHOW_ERROR_MESSAGE = 201;
     const INVALID_ACCESS_TOKEN = 101, ERROR_IN_EXECUTION = 404;
     
@@ -78,7 +80,7 @@ class OrderController extends BaseController{
                     $hourLater      = strtotime($_POST['delivery_time']) + 60 * 60; 
                     $startSales     = array(
                         'trans_id'      => $track_id,
-                        'date_of_order' => $this->request->getPost('date_of_order'),
+                        'date_of_order' => date('Y-m-d H:i:s'),
                         'item_sold'     => json_encode($this->session->get('cart_item')),
                         'status'        => 'pending',
                         'agent'         => '',
@@ -134,7 +136,7 @@ class OrderController extends BaseController{
         parse_str($this->request->getPost('data'), $customer);
         $getTeam    = json_decode($this->__getAvailableFleets());
         
-        $hourLater  = strtotime($customer['delivery_time']) + 60 * 60; 
+        //$hourLater  = strtotime($customer['delivery_time']) + 60 * 60; 
         
         foreach($getTeam->data as $keys => $values){
             if(strtolower($values->team_name) == $_SESSION['strLocation']){
@@ -159,7 +161,7 @@ class OrderController extends BaseController{
                         \"customer_address\": \"".$customer['address']."\",
                         \"latitude\": \"\",
                         \"longitude\": \"\",
-                        \"job_delivery_datetime\": \"".date('m/d/Y H:i:s', $hourLater)." \",
+                        \"job_delivery_datetime\": \"".date('m/d/Y H:i:s', strtotime(('+1 hour')))." \",
                         \"has_pickup\": \"1\",
                         \"has_delivery\": \"1\",
                         \"layout_type\": \"0\",
@@ -209,7 +211,7 @@ class OrderController extends BaseController{
         $getTeam    = json_decode($this->__getAvailableFleets());
         $strArea    = array_keys($this->__getShopsTask('location'));
         
-        $hourLater  = strtotime($customer['delivery_time']) + 60 * 60; 
+        //$hourLater  = strtotime($customer['delivery_time']) + 60 * 60; 
         
         curl_setopt($ch, CURLOPT_URL, "https://api.tookanapp.com/create_task");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
@@ -239,7 +241,7 @@ class OrderController extends BaseController{
                         \"customer_address\": \"".$customer['address']."\",
                         \"latitude\": \"\",
                         \"longitude\": \"\",
-                        \"job_delivery_datetime\": \"".date('m/d/Y H:i:s', $hourLater)." \",
+                        \"job_delivery_datetime\": \"".date('m/d/Y H:i:s', strtotime(('+1 hour')))." \",
                         \"has_pickup\": \"1\",
                         \"has_delivery\": \"1\",
                         \"layout_type\": \"0\",

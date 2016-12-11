@@ -23,7 +23,7 @@ class Register extends BaseModel{
     }
     
     public function validation(){
-        $security   = new Phalcon\Security();
+        $security   = new \Phalcon\Security();
         $validation = new \Phalcon\Validation();
         $validation->add('email', new Validator\Email(array(
             'model'     => $this,

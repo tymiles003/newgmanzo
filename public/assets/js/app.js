@@ -98,6 +98,7 @@
         $('#updateShoppingCart').on('click', function(e){
             e.preventDefault();
             var quantity = [];
+            bootbox.alert('<strong style="color:white">Please wait. Updating in Progress</strong>')
             $.each($('.qty_pack'), function(index, element){
                 quantity.push(element.value);
             });
@@ -165,6 +166,12 @@
             var calTdTarget = parseInt(grandTotal.next().text()) * parseInt(nextInput.val());
             tdTarget.html('<span class="cart-grand-total-price">' + calTdTarget + '</span>');
         });
+        
+        $('.updateSingle').click(function(e){
+            e.preventDefault();
+            var updateItem  = $(this).attr('id').substring(7);
+            var inputNum    = $(this).parent().siblings('input');
+        })
         
         $('i.fa-sort-desc').on('click', function(e){
             e.preventDefault();

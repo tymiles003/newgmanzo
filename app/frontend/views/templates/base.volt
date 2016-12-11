@@ -15,7 +15,6 @@
             {{ this.assets.outputCss('headers') }}
             <link href="https://fonts.googleapis.com/css?family=Droid+Sans|Open+Sans" rel="stylesheet" /> 
             {% block head %} {% endblock %}
-	    
 		
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="assets/images/favicon.ico">
@@ -40,7 +39,7 @@
 
 #myModalState, #pickUpModal {
    /**background: #3498db !important;**/
-   background: #fafafa !important;
+   /*background: #fafafa !important;*/
    /**opacity: .80;
    filter: Alpha(Opacity=80);**/
 }
@@ -138,7 +137,7 @@
           <!-- Mini Cart Start-->
           <div class="col-table-cell col-lg-3 col-md-3 col-md-pull-0 col-sm-6 col-sm-pull-6 col-xs-12 inner">
             <div id="cart">
-              <button type="button" id="basketMouth" data-toggle="dropdown" data-loading-text="Loading..." class="heading dropdown-toggle"> <span class="cart-icon pull-left flip"></span> <span id="cart-total"><span id="total_items">0</span> item(s) - $<span class="value">0.00</span></span></button>
+              <button type="button" id="basketMouth" data-toggle="dropdown" data-loading-text="Loading..." class="heading dropdown-toggle"> <span class="cart-icon pull-left flip"></span> <span id="cart-total"><span id="total_items">0</span> item(s) - &#8358;<span class="value">0.00</span></span></button>
               <ul class="dropdown-menu">
                 <li id="mycart">
                   
@@ -208,8 +207,8 @@
           <div class="contact col-lg-4 col-md-4 col-sm-12 col-xs-12">
             <h5>Contact Details</h5>
             <ul>
-              <li class="address"><i class="fa fa-map-marker"></i>Central Square, 22 Hoi Wing Road, New Delhi, India</li>
-              <li class="mobile"><i class="fa fa-phone"></i>+91 9898777656</li>
+              <li class="address"><i class="fa fa-map-marker"></i>Ibadan, Oyo State, Nigeria</li>
+              <li class="mobile"><i class="fa fa-phone"></i>+234 7087 563 756</li>
               <li class="email"><i class="fa fa-envelope"></i>Send email via our <a href="mailto:sales@gmanzo.com">Contact Us</a>
             </ul>
           </div>
@@ -346,7 +345,7 @@
         </p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="lnk btn" data-dismiss="modal" style="background:none;">Close Window</button>
+        <button type="button" class="lnk btn" data-dismiss="modal">Close Window</button>
         <!--<button type="button" class="lnk btn btn-lg" style="background:white; border:1px solid #444; color:#444;"><strong>Display Shops</strong></button>-->
       </div>
     </div><!-- /.modal-content -->

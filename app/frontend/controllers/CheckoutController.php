@@ -22,7 +22,7 @@ class CheckoutController extends BaseController{
     public function initialize() {
         parent::initialize();
         \Phalcon\Tag::appendTitle('Check Out');
-        $this->view->setVar('vendors', $this->__getVendor(10));
+        //$this->view->setVar('vendors', $this->__getVendor(10));
         $this->view->setVar('strLocation', $this->session->get('strLocation'));
         $this->view->setVar('category', Category::find()->toArray());
     }
@@ -32,11 +32,9 @@ class CheckoutController extends BaseController{
         if($this->request->hasQuery('clear')){
             $this->session->remove('cart_item');
         }
-        
         if($this->session->has('cart_item')){
-            $this->view->setVars(array(
-                'cart_item' => $this->session->get('cart_item')));
             $this->view->setVar('grandTotal', $this->__getItemTotal());
+            $this->view->setVars(array('cart_item'=>$this->session->get('cart_item')));
             $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_ACTION_VIEW);
             return;
         }
