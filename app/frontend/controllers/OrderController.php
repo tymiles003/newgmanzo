@@ -77,14 +77,14 @@ class OrderController extends BaseController{
                     $sales->setTransaction($transaction);
                     $this->__taskSessionAdd($track_id);
                     $vendorSales    = json_encode($this->session->get('cart_item'));
-                    $hourLater      = strtotime($_POST['delivery_time']) + 60 * 60; 
+                    //$hourLater      = strtotime($_POST['delivery_time']) + 60 * 60; 
                     $startSales     = array(
                         'trans_id'      => $track_id,
                         'date_of_order' => date('Y-m-d H:i:s'),
                         'item_sold'     => json_encode($this->session->get('cart_item')),
                         'status'        => 'pending',
                         'agent'         => '',
-                        'delivery_time' => date('Y-m-d H:i:s', $hourLater),
+                        'delivery_time' => date('Y-m-d H:i:s', strtotime('+1 hour')),
                         'vendor_id'     => $this->session->get('vendor_id')
                     );
                     
@@ -107,7 +107,7 @@ class OrderController extends BaseController{
             }
         }
         if($tracker){
-            $taskRespo  = json_decode($this->createTask());
+            $taskRespo  = json_decode($this->createTask($this->request->getPost()));
             if($taskRespo->status == self::ACTION_COMPLETE){
                 $response->setJsonContent(array(
                     'status'    => $tracker,
@@ -131,9 +131,9 @@ class OrderController extends BaseController{
      * CreateTask using this of the API fixtures
      * @return type
      */
-    public function createTask($json_decode = false){
+    public function createTask($customer, $json_decode = false){
         $typeRespo  = new \Phalcon\Http\Response();
-        parse_str($this->request->getPost('data'), $customer);
+        //parse_str($this->request->getPost('data'), $customer);
         $getTeam    = json_decode($this->__getAvailableFleets());
         
         //$hourLater  = strtotime($customer['delivery_time']) + 60 * 60; 
@@ -143,7 +143,7 @@ class OrderController extends BaseController{
                 $vendor     = \Multiple\Frontend\Models\Vendor::find(
                         'vendor_id='.$this->session->get('vendor_id'))->getLast(); 
                 $jsonString = "{
-                        \"access_token\": \"".self::ACESS_TOKEN."\",
+                        \"api_key\": \"".self::ACESS_TOKEN."\",
                         \"order_id\": \"".$customer['trans_id']."\",
                         \"team_id\": \"".$values->team_id."\",
                         \"auto_assignment\": \"0\",
@@ -181,7 +181,7 @@ class OrderController extends BaseController{
                             \"data\": \"\"
                           }
                         ],
-                        \"fleet_id\": \"17769\",
+                        \"fleet_id\": \"22206\",
                         \"p_ref_images\": [
                           \"http://tookanapp.com/wp-content/uploads/2015/11/logo_dark.png\",
                           \"http://tookanapp.com/wp-content/uploads/2015/11/logo_dark.png\"
@@ -195,7 +195,7 @@ class OrderController extends BaseController{
                         \"geofence\": 0
                     }";
                 $curlRespo  = $this->__curlRequestTask(
-                        "https://api.tookanapp.com/create_task", $jsonString);
+                        "https://api.tookanapp.com/v2/create_task", $jsonString);
                 return $json_decode ? json_decode($curlRespo) : $curlRespo;
             }
         }

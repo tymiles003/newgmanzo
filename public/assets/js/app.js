@@ -31,7 +31,8 @@
                 },
                 success:    function(response,status,xhr){
                     //if(response.task == 'OK'){
-                        bootbox.alert('<h4>Task Performed! '+response.tookan.customer_name+'</h4>', function(){
+                        var stringJSON  = $.parseJSON(JSON.stringify(response))
+                        bootbox.alert('<h4>Task Performed! '+stringJSON.tookan.customer_name+'</h4>', function(){
                             $('#pickUpModal').modal('hide');
                             //$('#pickUpModal').html(clonePickUp);
                             window.location.reload();
@@ -82,12 +83,12 @@
                     cartStackFlow().getCartFlowId();
                     if(response.status == true){
                         $('#view-alert').find('#monitor').html('<a href="'+
-                                response.tokan.delivery_tracing_link+'">click</a>');
-                        $('#view-alert').find('#order_id').html(response.tokan.order_id)
+                                response.tookan.delivery_tracing_link+'">click</a>');
+                        $('#view-alert').find('#order_id').html(response.tookan.order_id)
                         $('#view-alert').fadeIn();
                     }
                     else{
-                        bootbox.alert('Error Message:'+JSON.stringify(response.tokan), function(){
+                        bootbox.alert('Error Message:'+JSON.stringify(response.tookan), function(){
                             window.location.reload();
                         });
                     }

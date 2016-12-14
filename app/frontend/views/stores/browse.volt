@@ -69,13 +69,13 @@
 	}
 
         .modal-body {
-            background: white !important;
+            /*background: white !important;*/
             height:100%;
         }
 
 	.modal-header {
-		border-bottom-color: #EEEEEE;
-		background-color: #FAFAFA;
+		/*border-bottom-color: #EEEEEE;
+		background-color: #FAFAFA;*/
 	}
 
 
@@ -87,12 +87,12 @@
     margin-top:10px !important;
 }
 
-#myModalState {
+/**#myModalState {
    /**background: #3498db !important;**/
    background: #fafafa !important;
    /**opacity: .80;
    filter: Alpha(Opacity=80);**/
-}
+}**/
 
 .modal-header, .modal-footer {
   text-align: center;

@@ -28,6 +28,7 @@ class CustomerController extends BaseController{
             "pass"  => $this->config['db']['password'],
             "db"    => $this->config['db']['dbname']
         );
+        
         $this->view->setVar('category', \Multiple\Frontend\
                 Models\Category::find()->toArray());
         $this->__setPropertyTask();
