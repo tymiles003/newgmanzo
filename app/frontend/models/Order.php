@@ -19,4 +19,8 @@ class Order extends BaseModel{
         $this->allowEmptyStringValues(array(
             'company','additional_info'));
     }
+    
+    public function beforeValidationOnCreate(){
+        
+    }
 }

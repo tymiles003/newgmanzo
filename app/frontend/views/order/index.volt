@@ -73,8 +73,8 @@
                     <input type="text" name="company" class="form-control unicase-form-control text-input" id="exampleInputEmail2" >
 	    	</div>
                 <div class="form-group">
-                    <!--<label class="info-title" for="exampleInputEmail2">Delivery Date/Time <span>*</span></label>
-                    <input type="text" name="delivery_time" class="form-control unicase-form-control text-input" id="pick_date" >-->
+                    <label class="info-title" for="exampleInputEmail2">Delivery Date/Time <span>*</span></label>
+                    <input type="text" name="delivery_time" class="form-control unicase-form-control text-input" id="pick_date" >
                     <input type="hidden" name="trans_id" class="form-control unicase-form-control text-input" value="{{track_id}}" >
                     <input type="hidden" name="date_of_order" class="form-control unicase-form-control text-input" value="<?php echo date('Y-m-d h:i:s'); ?>" >
 	  	</div>
@@ -148,10 +148,15 @@
             <td><strong>{{values['name'] | capitalize}}</strong> (Sold By {{values['addedby']}}) <strong>x {{values['qty']}}</strong></td>
             <td>₦{{values['qty'] * values['price']}}</td>
         </tr>
+        
         {% endfor %}
+        <tr>
+            <td><strong>Delivery Cost</strong></td>
+            <td><strong>&#8358;700</strong></td>
+        </tr>
         <tr style="border-top:1px solid #bbb;">
             <td><strong>CART TOTAL</strong></td>
-            <td><strong>₦{{totalPrice}}</strong></td>
+            <td><strong>₦{{totalPrice + 700}}</strong></td>
         </tr>
         </table>
         <p>I've read and accepted the <strong>terms & conditions</strong></p>

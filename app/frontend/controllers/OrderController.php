@@ -28,15 +28,30 @@ class OrderController extends BaseController{
     const ACESS_TOKEN = '29f741c22519903ae0428adaef01b0de23d2e0307626d82470ccf74fccb6d05b';
     const PARAMETER_MISSING = 100, ACTION_COMPLETE = 200, SHOW_ERROR_MESSAGE = 201;
     const INVALID_ACCESS_TOKEN = 101, ERROR_IN_EXECUTION = 404;
+    private $_vendor = array();
     
     public function initialize() {
         parent::initialize();
         \Phalcon\Tag::appendTitle('Order Now');
         $this->view->setVar('totalPrice', $this->__getSubTotal());
         $this->view->setVar('category', Category::find()->toArray());
-        $this->_track = $this->component->helper->makeRandomInts(10);
-        //$this->view->setVar('totalPrice', $this->__getSubTotal());
+        $this->_track   = $this->component->helper->makeRandomInts(10);
+        $this->_vendor  = json_decode(key($this->__getShopsTask('vendor_id')));
+        $this->session->set('vendor_id', $this->_vendor->id);
         $this->view->setVar('track_id', $this->_track);
+        //var_dump($this->__checkTotalAmount()); exit;
+        if($this->__checkTotalAmount() < 5000){
+            $this->response->redirect('index?task=request&r=sm');
+            $this->flash->warning('You need to make a cart worth 5000 at least');
+            $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_NO_RENDER);
+            return;
+        }
+        if(!$this->session->has('strLocation')){
+            $this->flash->warning('You need to select a location.');
+            $this->response->redirect('index?task=request&r=location');
+            $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_NO_RENDER);
+            return;
+        }
     }
     
     public function indexAction(){
@@ -62,8 +77,8 @@ class OrderController extends BaseController{
                     $order->setTransaction($transaction);
                     $default        = date('Y-m-d');
                     $this->__buildRequest(array(
-                        'trans_id'  => $track_id,
-                        'vendor_id' => $this->session->get('vendor_id')));
+                        'register_id'   => $this->session->get('auth')['register_id'],
+                        'vendor_id'     => $this->session->get('vendor_id')));
                     
                     //Setup the order insert which is the post field
                     if($order->save($this->request->getPost()) == FALSE){
@@ -78,14 +93,16 @@ class OrderController extends BaseController{
                     $this->__taskSessionAdd($track_id);
                     $vendorSales    = json_encode($this->session->get('cart_item'));
                     //$hourLater      = strtotime($_POST['delivery_time']) + 60 * 60; 
+                    $newDate        = $this->request->getPost('delivery_time');
                     $startSales     = array(
                         'trans_id'      => $track_id,
-                        'date_of_order' => date('Y-m-d H:i:s'),
+                        'date_of_order' => date('Y-m-d H:i:s', strtotime('+1 hour')),
                         'item_sold'     => json_encode($this->session->get('cart_item')),
                         'status'        => 'pending',
                         'agent'         => '',
-                        'delivery_time' => date('Y-m-d H:i:s', strtotime('+1 hour')),
-                        'vendor_id'     => $this->session->get('vendor_id')
+                        'delivery_time' => $this->__quickDateFormat($newDate),
+                        'register_id'   => $this->session->get('auth')['register_id'],
+                        'vendor_id'     => $this->session->get('vendor_id'),
                     );
                     
                     if($sales->save($startSales) == FALSE){
@@ -107,7 +124,8 @@ class OrderController extends BaseController{
             }
         }
         if($tracker){
-            $taskRespo  = json_decode($this->createTask($this->request->getPost()));
+            $customer   = $this->request->getPost();
+            $taskRespo  = json_decode($this->createTask($customer));
             if($taskRespo->status == self::ACTION_COMPLETE){
                 $response->setJsonContent(array(
                     'status'    => $tracker,
@@ -135,13 +153,12 @@ class OrderController extends BaseController{
         $typeRespo  = new \Phalcon\Http\Response();
         //parse_str($this->request->getPost('data'), $customer);
         $getTeam    = json_decode($this->__getAvailableFleets());
-        
         //$hourLater  = strtotime($customer['delivery_time']) + 60 * 60; 
         
         foreach($getTeam->data as $keys => $values){
             if(strtolower($values->team_name) == $_SESSION['strLocation']){
                 $vendor     = \Multiple\Frontend\Models\Vendor::find(
-                        'vendor_id='.$this->session->get('vendor_id'))->getLast(); 
+                        'vendor_id='.$this->session->get('vendor_id'))->getLast();
                 $jsonString = "{
                         \"api_key\": \"".self::ACESS_TOKEN."\",
                         \"order_id\": \"".$customer['trans_id']."\",
@@ -154,14 +171,14 @@ class OrderController extends BaseController{
                         \"job_pickup_address\": \"".$vendor->address2."\",
                         \"job_pickup_latitude\": \"\",
                         \"job_pickup_longitude\": \"\",
-                        \"job_pickup_datetime\": \"".date('m/d/Y H:i:s')."\",
+                        \"job_pickup_datetime\": \"".date('m/d/Y H:i:s', strtotime(('+1 hour')))."\",
                         \"customer_email\": \"".$customer['email']."\",
                         \"customer_username\": \"".$customer['lastname']." ".$customer['firstname']."\",
                         \"customer_phone\": \"".$customer['phonenumber']."\",
                         \"customer_address\": \"".$customer['address']."\",
                         \"latitude\": \"\",
                         \"longitude\": \"\",
-                        \"job_delivery_datetime\": \"".date('m/d/Y H:i:s', strtotime(('+1 hour')))." \",
+                        \"job_delivery_datetime\": \"".$customer['delivery_time']." \",
                         \"has_pickup\": \"1\",
                         \"has_delivery\": \"1\",
                         \"layout_type\": \"0\",
@@ -398,13 +415,14 @@ class OrderController extends BaseController{
      */
     private function __getAvailableFleets(){
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://api.tookanapp.com/view_team");
+        //curl_setopt($ch, CURLOPT_URL, "https://api.tookanapp.com/view_team");
+        curl_setopt($ch, CURLOPT_URL, "https://api.tookanapp.com/v2/view_teams");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_HEADER, FALSE);
         curl_setopt($ch, CURLOPT_POST, TRUE);
         
         curl_setopt($ch, CURLOPT_POSTFIELDS, "{
-            \"access_token\": \"e824c4f685bca92ed63ffd522a855f52\"
+            \"api_key\": \"".self::ACESS_TOKEN."\"
         }");
         
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
@@ -431,6 +449,10 @@ class OrderController extends BaseController{
         return join(',', $stringify);
     }
     
+    private function __quickDateFormat($date){
+        return date('Y-m-d h:i:s', strtotime($date));
+    }
+    
     /**
      * @param type $tracker
      * force trans_id into the session array
@@ -454,5 +476,17 @@ class OrderController extends BaseController{
             $return[$values[$key]][]   = $values;
         }
         return $return;
+    }
+    
+    /**
+     * Add up the total price of all the products
+     * @return array
+     */
+    private function __checkTotalAmount(){
+        $priceTotal = array();
+        foreach($this->session->get('cart_item') as $key=>$value){
+            $priceTotal[]   = $value['price'] * $value['qty'];
+        }
+        return array_sum($priceTotal);
     }
 }

@@ -6,6 +6,7 @@
 {% block content %}
     <!--Middle Part Start-->
         <div id="content" class="col-xs-12">
+          {{flash.output()}}
           <div class="row">
             <div class="col-sm-8">
               <!-- Slideshow Start-->
@@ -240,7 +241,7 @@
       </div>
       <div class="modal-body">
         <p>
-        <input type="text" class="form-control input-lg" id="input-location" placeholder="Enter you location" name="location" />
+        <input type="text" class="form-control input-lg" id="input-location" placeholder="Enter your state" name="location" />
         <!--<button type="button" class="btn btn-block btn-lg btn-primary"><strong><small>Display Shops</small></strong></button>-->
         </p>
       </div>

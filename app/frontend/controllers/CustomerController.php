@@ -41,7 +41,7 @@ class CustomerController extends BaseController{
     
     public function historyAction(){
         $config = $this->_config;
-        $this->__tableDataCssJs();
+        //$this->__tableDataCssJs();
         $response   = new \Phalcon\Http\Response();
         $primaryKey = 'sales_id'; $table = 'sales';
         if($this->request->isGet() && $this->request->isAjax()){
@@ -59,7 +59,8 @@ class CustomerController extends BaseController{
                     return $track ? $track->tracking_link : '';
                 }),
             );
-            $whereAll    = 'vendor_id='.$this->_codename;
+            $whereAll    = 'register_id='.
+                    $this->session->get('auth')['register_id'];
             $response->setJsonContent(
                     \Multiple\Frontend\Plugins\SspPlugin::complex(
                             $_GET, $config, $table, $primaryKey, $columns, NULL, $whereAll));
@@ -114,7 +115,8 @@ class CustomerController extends BaseController{
                 }),
                 array('db' => 'item_sold', 'dt' => 4),
             );
-            $whereAll    = 'vendor_id='.$this->_codename;
+            $whereAll    = 'register_id='.
+                    $this->session->get('auth')['register_id'];
             $response->setJsonContent(
                     \Multiple\Frontend\Plugins\SspPlugin::complex(
                             $_GET, $config, $table, $primaryKey, $columns, NULL, $whereAll));

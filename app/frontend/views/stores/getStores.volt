@@ -34,7 +34,7 @@
       </div>
       <div class="modal-body" style="background:none !important;">
         <p>
-        <input type="text" class="form-control input-lg" id="input-location" placeholder="Enter you location" name="location" />
+        <input type="text" class="form-control input-lg" id="input-location" placeholder="Enter your state" name="location" />
         <!--<button type="button" class="btn btn-block btn-lg btn-primary"><strong><small>Display Shops</small></strong></button>-->
         </p>
       </div>

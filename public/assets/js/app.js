@@ -8,6 +8,10 @@
     
     var jsonBody    = {};
     $(document).ready(function(){
+        
+        $("#pick_date").datetimepicker({
+            format:'m/d/Y H:i:s'
+        });
         //starting the pick up and delivery task
         $(document).on('click','button#createTask', function(e){
             e.preventDefault();
@@ -75,25 +79,37 @@
         $('#place-order').on('click', function(e){
             e.preventDefault();
             var serialFormFlow  = $('#billing-form').serialize();
-            $.ajax({
-                type:   'POST',
-                url:    'http://localhost/newgmanzo/order/start',
-                data:   serialFormFlow,
-                success: function(response){
-                    cartStackFlow().getCartFlowId();
-                    if(response.status == true){
-                        $('#view-alert').find('#monitor').html('<a href="'+
-                                response.tookan.delivery_tracing_link+'">click</a>');
-                        $('#view-alert').find('#order_id').html(response.tookan.order_id)
-                        $('#view-alert').fadeIn();
-                    }
-                    else{
-                        bootbox.alert('Error Message:'+JSON.stringify(response.tookan), function(){
-                            window.location.reload();
-                        });
-                    }
-                }
+            var formVarNow      = $('#billing-form');
+            var emptyFields     = formVarNow.filter(function(){
+                return $.trim(this.value) === "";
             });
+            if(emptyFields.length == 0){
+                alert('Empty Field');
+            }
+            else{
+                $.ajax({
+                    type:   'POST',
+                    url:    'http://localhost/newgmanzo/order/start',
+                    data:   serialFormFlow,
+                    success: function(response){
+                        cartStackFlow().getCartFlowId();
+                        var stookan = $.parseJSON(JSON.stringify(response));
+                        alert(JSON.stringify(response.tookan.message));
+                        if(response.status){
+                            $('.view-alert').addClass('show').removeClass('hide').find('#monitor')
+                                    .html('<a href="'+response.tookan.data.delivery_tracing_link+'">click</a>');
+                            $('.view-alert').find('#order_id').html(response.data.trans_id);
+                            $('.view-alert').removeClass('hide').fadeIn();
+                        }
+                        else{
+                            bootbox.alert('Error Message:'+JSON.stringify(response.tookan), function(){
+                                window.location.reload();
+                            });
+                        }
+                        $("#place-order").text("PLACE ORDER NOW");
+                    }
+                });
+            }
         });
         
         $('#updateShoppingCart').on('click', function(e){
