@@ -74,7 +74,9 @@ class CustomerController extends BaseController{
     }
     
     public function wishListAction(){
-        
+        if($this->request->isAjax() && $this->request->isPost()){
+            
+        }
     }
     
     public function editWishListAction(){

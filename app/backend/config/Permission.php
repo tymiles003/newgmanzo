@@ -37,7 +37,7 @@ class Permission extends \Phalcon\Mvc\User\Plugin{
         'registration'  => ['*'],
         'members'       => ['*'],
         'customer'      => ['*'],
-        'products'      => ['*'],
+        'products'      => ['show','products'],
         'order'         => ['*'],
         'vendor'        => ['*']
     );

@@ -24,15 +24,16 @@ class ProductsController extends BaseController{
     const LIMIT = 20;
     private $_currentPage;
     private $_role, $_vendor_id;
+    private $_config;
     
     public function initialize() {
         parent::initialize();
         \Phalcon\Tag::appendTitle("Products | Category");
         $this->_currentPage = (int) $this->request->getQuery();
         $this->assets->collection('headers')->addCss(
-                'assets/vendor/datatables-bootstrap/dataTables.bootstrap.css')
-                ->addCss('assets/vendor/datatables-fixedheader/dataTables.fixedHeader.css')
-                ->addCss('assets/vendor/datatables-responsive/dataTables.responsive.css');
+                'admin/vendor/datatables-bootstrap/dataTables.bootstrap.css')
+                ->addCss('admin/vendor/datatables-fixedheader/dataTables.fixedHeader.css')
+                ->addCss('admin/vendor/datatables-responsive/dataTables.responsive.css');
         $this->assets->collection('footers')->addJs(
                 'admin/vendor/datatables/jquery.dataTables.min.js')
                 ->addJs('admin/vendor/datatables-fixedheader/dataTables.fixedHeader.js')
@@ -43,6 +44,13 @@ class ProductsController extends BaseController{
                 ->addJs('admin/js/customapp.js');
         $this->_vendor_id   = $this->session->get('auth')['vendor_id'];
         $this->_role        = $this->session->get('auth')['role'];
+        
+        $this->_config = array(
+            "host"  => $this->config['db']['host'],
+            "user"  => $this->config['db']['username'],
+            "pass"  => $this->config['db']['password'],
+            "db"    => $this->config['db']['dbname']
+        );
     }
     
     public function indexAction(){
@@ -92,12 +100,7 @@ class ProductsController extends BaseController{
      * @return type
      */
     public function tableProductAction(){
-        $config = array(
-            "host"  => "localhost",
-            "user"  => "root",
-            "pass"  => "",
-            "db"    => "bucketmanager"
-        );
+        $config = $this->_config;
         //var_dump($config); exit;
         $response   = new \Phalcon\Http\Response();
         $table  = 'products'; $primaryKey  = 'product_id';

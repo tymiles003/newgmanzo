@@ -17,25 +17,32 @@ use Phalcon\Paginator\Adapter\QueryBuilder;
 
 class CustomerController extends BaseController{
     //put your code here
+    public $_config;
     const LIMIT = 20;
     private $_currentPage, $_searchQuery;
 
     public function initialize() {
         parent::initialize();
         \Phalcon\Tag::appendTitle('Customers');
+        $this->_config = array(
+            "host"  => $this->config['db']['host'],
+            "user"  => $this->config['db']['username'],
+            "pass"  => $this->config['db']['password'],
+            "db"    => $this->config['db']['dbname']
+        );
         $this->assets->collection('headers')
-                ->addCss('assets/css/pages/user.css');
+                ->addCss('admin/css/pages/user.css');
         $this->assets->collection('headers')->addCss(
-                'assets/vendor/datatables-bootstrap/dataTables.bootstrap.css')
-                ->addCss('assets/vendor/datatables-fixedheader/dataTables.fixedHeader.css')
-                ->addCss('assets/vendor/datatables-responsive/dataTables.responsive.css');
+                'admin/vendor/datatables-bootstrap/dataTables.bootstrap.css')
+                ->addCss('admin/vendor/datatables-fixedheader/dataTables.fixedHeader.css')
+                ->addCss('admin/vendor/datatables-responsive/dataTables.responsive.css');
         $this->assets->collection('footers')->addJs(
-                'assets/vendor/datatables/jquery.dataTables.min.js')
-                ->addJs('assets/vendor/datatables-fixedheader/dataTables.fixedHeader.js')
-                ->addJs('assets/vendor/datatables-bootstrap/dataTables.bootstrap.js')
-                ->addJs('assets/vendor/datatables-responsive/dataTables.responsive.js')
-                ->addJs('assets/vendor/datatables-tabletools/dataTables.tableTools.js')
-                ->addJs('assets/js/customapp.js');
+                'admin/vendor/datatables/jquery.dataTables.min.js')
+                ->addJs('admin/vendor/datatables-fixedheader/dataTables.fixedHeader.js')
+                ->addJs('admin/vendor/datatables-bootstrap/dataTables.bootstrap.js')
+                ->addJs('admin/vendor/datatables-responsive/dataTables.responsive.js')
+                ->addJs('admin/vendor/datatables-tabletools/dataTables.tableTools.js')
+                ->addJs('admin/js/customapp.js');
         $this->_currentPage = $this->request->getQuery('p', 'int');
     }
     
@@ -76,13 +83,50 @@ class CustomerController extends BaseController{
         return;
     }
     
-    public function showAction(){
-        $config = array(
-            "host"  => "localhost",
-            "user"  => "root",
-            "pass"  => "",
-            "db"    => "bucketmanager"
+    public function getCustomerAction(){
+        $this->view->setVar('customers',            $this->getPayers());
+        $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_ACTION_VIEW);
+        return;
+    }
+    
+    
+    public function getCustomersAction(){
+        $config     = $this->_config;
+        $response   = new \Phalcon\Http\Response();
+        $primaryKey = 'order_id'; $table = 'order';
+        
+        $columns    = array(
+            array('db' => 'firstname', 'dt' => 0),
+            array('db' => 'lastname', 'dt' => 1),
+            array('db' => 'email', 'dt' => 2),
+            array('db' => 'phonenumber', 'dt' => 3),
+            array('db' => 'register_id', 'dt' => 4),
         );
+        $w      = 'vendor_id="' . 
+                $this->session->get('auth')['vendor_id'].'"';
+        $gfix   = " GROUP BY phonenumber";
+
+        $response->setJsonContent(
+                \Multiple\Backend\Plugins\SspPlugin::complex(
+                $_GET, $config, $table, $primaryKey, $columns, $w));
+        $this->view->setRenderLevel(\Phalcon\Mvc\View::LEVEL_NO_RENDER);
+        $response->setHeader('Content-Type', 'application/json');
+        $response->sendHeaders(); $response->send();
+        exit(); return;
+    }
+    
+    public function getPayers(){
+        $response   = new \Phalcon\Http\Response();
+        $builder    = $this->modelsManager->createBuilder();
+        $tasking    = $builder->from(array(
+            'r'=>'\Multiple\Backend\Models\Order'))
+                ->where('r.vendor_id='.$this->session->get('auth')['vendor_id'])
+                ->groupBy('r.phonenumber')->getQuery()->execute();
+        return $tasking;
+    }
+    
+    public function showAction(){
+        $config = $this->_config;
         $response   = new \Phalcon\Http\Response();
         $primaryKey = 'register_id'; $table = 'register';
         if($this->request->isGet() && $this->request->isAjax()){

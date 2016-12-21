@@ -55,6 +55,11 @@
             });
         })
         
+        //Get Customers Registered under a vendor
+        var getCustomerTable    = $('#getCustomerTable').DataTable({
+            "responsive": true
+        });
+        
         //control click on the button on the exampleFixedHeader
         $('#examplePageHeader tbody').on('click', 'button.editorn', function(ev){
             var clickData   = tablePage.row($(this).parents('tr')).data();
@@ -81,7 +86,7 @@
             {
                 "render": function(data, type, row){
                     //return data + '{' + row[4] + '}';
-                    return '<img class="img-responsive" width="30%" src="http://localhost/newgmanzo/backend/assets/uploads/'+data+'" />';
+                    return '<img class="img-responsive" width="30%" src="http://localhost/newgmanzo/assets/uploads/'+data+'" />';
                 },
                 "targets": 5
             },
@@ -119,7 +124,7 @@
           "columnDefs": [{
                 "targets": -1,
                 "data": null,
-                "defaultContent": "<div class='btn-group'><button type='button' class='btn btn-default view' data-target='#examplePositionSidebar' data-toggle='modal'>View</button><button class='btn btn-default delete'>Delete</button></div>"
+                "defaultContent": "<div class='btn-group'><button type='button' class='btn btn-default btn-sm view' data-target='#examplePositionSidebar' data-toggle='modal'>View</button></div>"
             }]
           //"sDom": "t" // just show table, no other controls
         });

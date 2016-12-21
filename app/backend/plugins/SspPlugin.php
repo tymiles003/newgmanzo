@@ -174,7 +174,7 @@ class SspPlugin extends Plugin {
 				$column = $columns[ $columnIdx ];
 
 				if ( $requestColumn['searchable'] == 'true' ) {
-					$binding = self::bind( $bindings, '%'.$str.'%', PDO::PARAM_STR );
+					$binding = self::bind( $bindings, '%'.$str.'%', \PDO::PARAM_STR );
 					$globalSearch[] = "`".$column['db']."` LIKE ".$binding;
 				}
 			}
@@ -191,7 +191,7 @@ class SspPlugin extends Plugin {
 
 				if ( $requestColumn['searchable'] == 'true' &&
 				 $str != '' ) {
-					$binding = self::bind( $bindings, '%'.$str.'%', PDO::PARAM_STR );
+					$binding = self::bind( $bindings, '%'.$str.'%', \PDO::PARAM_STR );
 					$columnSearch[] = "`".$column['db']."` LIKE ".$binding;
 				}
 			}
@@ -302,7 +302,7 @@ class SspPlugin extends Plugin {
 	 *  @param  string $whereAll WHERE condition to apply to all queries
 	 *  @return array          Server-side processing response array
 	 */
-	static function complex ( $request, $conn, $table, $primaryKey, $columns, $whereResult=null, $whereAll=null )
+	static function complex ( $request, $conn, $table, $primaryKey, $columns, $whereResult=null, $whereAll=null, $groupBy=null )
 	{
 		$bindings = array();
 		$db = self::db( $conn );
@@ -331,6 +331,8 @@ class SspPlugin extends Plugin {
 
 			$whereAllSql = 'WHERE '.$whereAll;
 		}
+                
+                $groupfix   = !is_null($groupBy) ? $groupBy : '';
 
 		// Main query to actually get the data
 		$data = self::sql_exec( $db, $bindings,
@@ -338,7 +340,8 @@ class SspPlugin extends Plugin {
 			 FROM `$table`
 			 $where
 			 $order
-			 $limit"
+			 $limit
+                         $groupfix"
 		);
 
 		// Data set length after filtering
@@ -392,7 +395,7 @@ class SspPlugin extends Plugin {
 				array( \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION )
 			);
 		}
-		catch (PDOException $e) {
+		catch (\PDOException $e) {
 			self::fatal(
 				"An error occurred while connecting to the database. ".
 				"The error reported by the server was: ".$e->getMessage()
@@ -435,7 +438,7 @@ class SspPlugin extends Plugin {
 		try {
 			$stmt->execute();
 		}
-		catch (PDOException $e) {
+		catch (\PDOException $e) {
 			self::fatal( "An SQL error occurred: ".$e->getMessage() );
 		}
 
